@@ -25,8 +25,6 @@ Panique : comme vous aviez toute confiance en lui depuis tant d'années de colla
 
 - Transformer un document texte en images. Ou trouver une autre façon de le "découper".
 
-
-
 ----------------------
 
 Exemple du prof pour la phase 1 de développement (phase de recherche) :
@@ -72,4 +70,3 @@ Remise 
 ------
 
 Énoncé du projet total :
-
