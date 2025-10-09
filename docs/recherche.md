@@ -1,6 +1,6 @@
 # Projet de session — Phase 1 (Recherche)
 
-## Titre : *Autoédition*
+## Titre&thinsp;: *Autoédition*
 
 ---
 
@@ -65,7 +65,7 @@ J’ai visionné plusieurs tutoriels pour les puzzles dans Godot :
 
 - Le [premier](https://www.youtube.com/watch?v=aODh7LNiEbI) que j'ai visionné se trouvait à avoir une grande faiblesse : chaque pièce de puzzle était une image indépendante. 
 
-- Alors j'ai visionné [celui-ci](https://www.youtube.com/watch?v=gfuflZ21FDU&list=PL5t0hR7ADzuk3drVsw-8BKx9JK35lp6Ix&index=1)), dont on voyait tout de suite que l'image de départ était complète. La façon de gérer le puzzle était plutôt utile, par contre il y aurra beaucoup d'adaptation a faire au niveau des contrôles utilisateurs, car ce n'est un puzzle basée sur une tuile vide vers laquelle les pièce se déplacent quand on clique dessus.
+- Alors j'ai visionné [celui-ci](https://www.youtube.com/watch?v=gfuflZ21FDU&list=PL5t0hR7ADzuk3drVsw-8BKx9JK35lp6Ix&index=1)), dont on voyait tout de suite que l'image de départ était complète. La façon de gérer le puzzle était plutôt utile, par contre il y aurra beaucoup d'adaptation a faire au niveau des contrôles utilisateurs, car ce n'est un puzzle basée sur une tuile vide vers laquelle les pièces se déplacent quand on clique dessus.
 
 - Finalement, [ce tutoriel](https://www.youtube.com/watch?v=t27pntMNXf8) est plus complet, de par sa nature "drag and drop" de pieces, à convertir simplement en "parcourir, selectionner, switch(gauche ou droite) et lâcher(retour à parcourir)" dans le sens que l'arcade n'a pas de souris-clavier. Un autre point d'intérêt de ce tuto est que le nombre de pieces du puzzle est généré par un script, ce qui le rends davantage personalisable.
 
