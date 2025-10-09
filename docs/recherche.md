@@ -6,10 +6,10 @@
 
 ## Concept narratif
 
-Vous êtes persuadé·e d’avoir pondu le meilleur roman de votre longue carrière.  
-Pourtant, votre éditeur réagit mal. Est-ce la jalousie, le dégoût ou autre chose qui le pousse, devant vos yeux horrifiés, à saisir votre manuscrit — ainsi que votre contrat d’édition — pour les balancer ensemble dans la déchiqueteuseU+202F?
+Vous êtes persuadé·e avoir pondu le meilleur roman de votre longue carrière.  
+Pourtant, votre éditeur réagit mal. Est-ce la jalousie, le dégoût ou autre chose qui le pousse, devant vos yeux horrifiés, à saisir votre manuscrit — ainsi que votre contrat d’édition — pour les balancer ensemble dans la déchiqueteuse&thinsp;?
 
-Votre cœur chavire : comme vous aviez toute confiance en lui depuis tant d'années de collaboration, vous lui aviez fourni votre seule copie !
+Votre cœur chavire&thinsp;: comme vous aviez toute confiance en lui depuis tant d'années de collaboration, vous lui aviez fourni votre seule copie&thinsp;!
 
 **But du jeu**
 
@@ -20,7 +20,7 @@ Votre cœur chavire : comme vous aviez toute confiance en lui depuis tant d'ann�
 # Objectifs et intérêts
 
 - Créer un système de **génération automatique de niveaux**, avec des paramètres de difficulté incrémentables (ex. : nombre de languettes désordonnées vs. nombre total par section).
-      Exemple, au début il y a 1 languette en désordre dans une section de 10 langettes, puis éventuellement 20 languettes en désordre "distribuées"" dans un total de 30 languettes consécutives.
+      Exemple, au début il y a 1 languette en désordre dans une section de 10 langettes, puis éventuellement 20 languettes en désordre "distribuées" dans un total de 30 languettes consécutives.
 
 - Introduire des **éléments de collection** (fragments du contrat) qui influencent la mécanique principale — réduire la vitesse de perte des fans.
 
@@ -30,7 +30,7 @@ Votre cœur chavire : comme vous aviez toute confiance en lui depuis tant d'ann�
 
 - Réussir un niveau débloque l'éditeur de niveau : et pour l'ajouter au système, il faudra le réussir. Le niveau de difficulté pourra être évalué pour les mettre en ordre et reclassé selon le taux de réussite des joueurs.
 
-- À la fin du jeu, proposer un lien pour lire la suite du roman (fonction « jeu-pub »).
+- À la fin du jeu, proposer un lien pour lire la suite du roman (fonction «&thinsp;jeu-pub&thinsp;»).
 
 -------
 
@@ -38,13 +38,13 @@ Votre cœur chavire : comme vous aviez toute confiance en lui depuis tant d'ann�
 
 ###### Recherche 1 de 3 — Import automatique
 
-Au début, je voulais automatiser l'importation d'un document Google Docs pour que le manuscrit principal du jeu puisse être modifiable. Après recherches, j’estime que cela risque d’entraîner une surcharge de travail dans le temps imparti. Voici le résumé de cette recherche :
+Au début, je voulais automatiser l'importation d'un document Google Docs pour que le manuscrit principal du jeu puisse être modifiable. Après recherches, j’estime que cela risque d’entraîner une surcharge de travail dans le temps imparti. Voici le résumé de cette recherche&thinsp;:
 
 - Utiliser l'[API Google Docs](https://developers.google.com/docs/api) pour extraire le contenu du document en version pdf. Via files export (nécessite de configurer un projet dans la console Google Cloud pour obtenir les identifiants.)
 
 - Utiliser ensuite une autre API (exemple pdf2image) pour convertir le pdf en images.
 
-- Sinon, chat gpt m'a proposé d'utiliser OS.execute() pour appeler un script **Python + Pillow** pour générer directement des images à partir du texte (la point fort c'est que cela permet de choisir une police manuscrite). Exemple rapide (non testé)  :
+- Sinon, chat gpt m'a proposé d'utiliser OS.execute() pour appeler un script **Python + Pillow** pour générer directement des images à partir du texte (la point fort c'est que cela permet de choisir une police manuscrite). Exemple rapide (non testé)&thinsp;:
 
 ```python
 from PIL import Image, ImageDraw, ImageFont
@@ -61,9 +61,9 @@ img.save("page1.png")
 
 ### Recherche 2 de 3
 
-J’ai visionné plusieurs tutoriels pour les puzzles dans Godot :
+J’ai visionné plusieurs tutoriels pour les puzzles dans Godot&thinsp;:
 
-- Le [premier](https://www.youtube.com/watch?v=aODh7LNiEbI) que j'ai visionné se trouvait à avoir une grande faiblesse : chaque pièce de puzzle était une image indépendante. 
+- Le [premier](https://www.youtube.com/watch?v=aODh7LNiEbI) que j'ai visionné se trouvait à avoir une grande faiblesse&thinsp;: chaque pièce de puzzle était une image indépendante. 
 
 - Alors j'ai visionné [celui-ci](https://www.youtube.com/watch?v=gfuflZ21FDU&list=PL5t0hR7ADzuk3drVsw-8BKx9JK35lp6Ix&index=1)), dont on voyait tout de suite que l'image de départ était complète. La façon de gérer le puzzle était plutôt utile, par contre il y aurra beaucoup d'adaptation a faire au niveau des contrôles utilisateurs, car ce n'est un puzzle basée sur une tuile vide vers laquelle les pièces se déplacent quand on clique dessus.
 
