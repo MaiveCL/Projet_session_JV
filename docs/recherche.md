@@ -1,15 +1,15 @@
 # Projet de session — Phase 1 (Recherche)
 
-## Titre : *Autoédition*
+## Titre&thinsp;: *Autoédition*
 
 ---
 
 ## Concept narratif
 
-Vous êtes persuadé·e d’avoir pondu le meilleur roman de votre longue carrière.  
-Pourtant, votre éditeur réagit mal. Est-ce la jalousie, le dégoût ou autre chose qui le pousse, devant vos yeux horrifiés, à saisir votre manuscrit — ainsi que votre contrat d’édition — pour les balancer ensemble dans la déchiqueteuse ?
+Vous êtes persuadé·e avoir pondu le meilleur roman de votre longue carrière.  
+Pourtant, votre éditeur réagit mal. Est-ce la jalousie, le dégoût ou autre chose qui le pousse, devant vos yeux horrifiés, à saisir votre manuscrit — ainsi que votre contrat d’édition — pour les balancer ensemble dans la déchiqueteuse&thinsp;?
 
-Votre cœur chavire : comme vous aviez toute confiance en lui depuis tant d'années de collaboration, vous lui aviez fourni votre seule copie !
+Votre cœur chavire&thinsp;: comme vous aviez toute confiance en lui depuis tant d'années de collaboration, vous lui aviez fourni votre seule copie&thinsp;!
 
 **But du jeu**
 
@@ -20,17 +20,17 @@ Votre cœur chavire : comme vous aviez toute confiance en lui depuis tant d'ann�
 # Objectifs et intérêts
 
 - Créer un système de **génération automatique de niveaux**, avec des paramètres de difficulté incrémentables (ex. : nombre de languettes désordonnées vs. nombre total par section).
-      Exemple, au début il y a 1 languette en désordre dans une section de 10 langettes, puis éventuellement 20 languettes en désordre "distribuées"" dans un total de 30 languettes consécutives.
+      Exemple, au début il y a 1 languette en désordre dans une section de 10 langettes, puis éventuellement 20 languettes en désordre "distribuées" dans un total de 30 languettes consécutives.
 
 - Introduire des **éléments de collection** (fragments du contrat) qui influencent la mécanique principale — réduire la vitesse de perte des fans.
 
 - Permettre une **liberté de déplacement et de stratégie** (réparer tout de suite le roman ou chercher d’abord les preuves).
 
-- Offrir parrallèllement des **actions contextuelles** (Tenir un bouton appuyé quelques secondes (ou faire une série de boutons dans l'ordre pour — ex. : envoyer un message au fanclub, supprimer/répondre à un troll — pour stabiliser la jauge de popularité).
+- Offrir parallèlement des **actions contextuelles** (Tenir un bouton appuyé quelques secondes ou faire une série de boutons dans l'ordre pour — ex.&thinsp;: envoyer un message au fanclub, supprimer/répondre à un troll — pour stabiliser la jauge de popularité).
 
-- Réussir un niveau débloque l'éditeur de niveau : et pour l'ajouter au système, il faudra le réussir. Le niveau de difficulté pourra être évalué pour les mettre en ordre et reclassé selon le taux de réussite des joueurs.
+- Réussir un niveau débloque l'éditeur de niveau&thinsp;: et pour l'ajouter au système, il faudra le réussir. Le niveau de difficulté pourra être évalué pour les mettre en ordre et reclassé selon le taux de réussite des joueurs.
 
-- À la fin du jeu, proposer un lien pour lire la suite du roman (fonction « jeu-pub »).
+- À la fin du jeu, proposer un lien pour lire la suite du roman (fonction «&thinsp;jeu-pub&thinsp;»).
 
 -------
 
@@ -38,13 +38,13 @@ Votre cœur chavire : comme vous aviez toute confiance en lui depuis tant d'ann�
 
 ###### Recherche 1 de 3 — Import automatique
 
-Au début, je voulais automatiser l'importation d'un document Google Docs pour que le manuscrit principal du jeu puisse être modifiable. Après recherches, j’estime que cela risque d’entraîner une surcharge de travail dans le temps imparti. Voici le résumé de cette recherche :
+Au début, je voulais automatiser l'importation d'un document Google Docs pour que le manuscrit principal du jeu puisse être modifiable. Après recherches, j’estime que cela risque d’entraîner une surcharge de travail dans le temps imparti. Voici le résumé de cette recherche&thinsp;:
 
 - Utiliser l'[API Google Docs](https://developers.google.com/docs/api) pour extraire le contenu du document en version pdf. Via files export (nécessite de configurer un projet dans la console Google Cloud pour obtenir les identifiants.)
 
 - Utiliser ensuite une autre API (exemple pdf2image) pour convertir le pdf en images.
 
-- Sinon, chat gpt m'a proposé d'utiliser OS.execute() pour appeler un script **Python + Pillow** pour générer directement des images à partir du texte (la point fort c'est que cela permet de choisir une police manuscrite). Exemple rapide (non testé)  :
+- Sinon, chat gpt m'a proposé d'utiliser OS.execute() pour appeler un script **Python + Pillow** pour générer directement des images à partir du texte (le point fort c'est que cela permet de choisir une police manuscrite). Exemple rapide (non testé)&thinsp;:
 
 ```python
 from PIL import Image, ImageDraw, ImageFont
@@ -57,30 +57,30 @@ draw.text((20,20), texte, fill=(0,0,0), font=font)
 img.save("page1.png")
 ```
 
-**Conclusion de la recherche 1 :** Je vais plutôt faire cela manuellement, quitte à n'avoir que du contenu fixe et ajouter cette fonctionalité à la fin si le temps le permet.
+**Conclusion de la recherche 1&thinsp;:** Je vais plutôt faire cela manuellement, quitte à n'avoir que du contenu fixe et ajouter cette fonctionalité à la fin si le temps le permet.
 
 ### Recherche 2 de 3
 
-J’ai visionné plusieurs tutoriels pour les puzzles dans Godot :
+J’ai visionné plusieurs tutoriels pour les puzzles dans Godot&thinsp;:
 
-- Le [premier](https://www.youtube.com/watch?v=aODh7LNiEbI) que j'ai visionné se trouvait à avoir une grande faiblesse : chaque pièce de puzzle était une image indépendante. 
+- Le [premier](https://www.youtube.com/watch?v=aODh7LNiEbI) que j'ai visionné se trouvait à avoir une grande faiblesse&thinsp;: chaque pièce de puzzle était une image indépendante. 
 
-- Alors j'ai visionné [celui-ci](https://www.youtube.com/watch?v=gfuflZ21FDU&list=PL5t0hR7ADzuk3drVsw-8BKx9JK35lp6Ix&index=1)), dont on voyait tout de suite que l'image de départ était complète. La façon de gérer le puzzle était plutôt utile, par contre il y aurra beaucoup d'adaptation a faire au niveau des contrôles utilisateurs, car ce n'est un puzzle basée sur une tuile vide vers laquelle les pièce se déplacent quand on clique dessus.
+- Alors j'ai visionné [celui-ci](https://www.youtube.com/watch?v=gfuflZ21FDU&list=PL5t0hR7ADzuk3drVsw-8BKx9JK35lp6Ix&index=1)), dont on voyait tout de suite que l'image de départ était complète. La façon de gérer le puzzle était plutôt utile, par contre il y aurra beaucoup d'adaptation à faire au niveau des contrôles utilisateurs, car ce n'est un puzzle basée sur une tuile vide vers laquelle les pièces se déplacent quand on clique dessus.
 
-- Finalement, [ce tutoriel](https://www.youtube.com/watch?v=t27pntMNXf8) est plus complet, de par sa nature "drag and drop" de pieces, à convertir simplement en "parcourir, selectionner, switch(gauche ou droite) et lâcher(retour à parcourir)" dans le sens que l'arcade n'a pas de souris-clavier. Un autre point d'intérêt de ce tuto est que le nombre de pieces du puzzle est généré par un script, ce qui le rends davantage personalisable.
+- Finalement, [ce tutoriel](https://www.youtube.com/watch?v=t27pntMNXf8) est plus complet, de par sa nature "drag and drop" de pieces, à convertir simplement en "parcourir, selectionner, switch(gauche ou droite) et lâcher(retour à parcourir)", car l'arcade n'a pas de souris-clavier. Un autre point d'intérêt de ce tuto est que le nombre de pieces du puzzle est généré par un script, ce qui le rends davantage personalisable.
 
-**Conclusion de la recherche 2 :** Si je désire ne personaliser que le mélange des pieces et non leur taille, je pourrais combiner le tuto 2 et 3.
+**Conclusion de la recherche 2&thinsp;:** Si je désire ne personaliser que le mélange des pieces et non leur taille, je pourrais combiner le tuto 2 et 3.
 
 ### Recherche 3 de 3
 
-J'ai eu beaucoup de mal à trouver les mots clefs exprimant la "navigation" parmis les fragments de romans afin de trouver des tutoriels. J'ai fini par trouver les [menu carousels](https://www.youtube.com/watch?v=z6sUvOBYpT4) très intéressants. Il ne me faudra que mixer ce principle avec celui du pooling pour naviger dans le jeu de façon optimisé.
+J'ai eu beaucoup de mal à trouver les mots clefs exprimant la "navigation" parmis les fragments de romans afin de trouver des tutoriels. J'ai fini par trouver les [menu carousels](https://www.youtube.com/watch?v=z6sUvOBYpT4) très intéressants. Il faudra mixer ce principle avec celui du pooling pour naviger dans le jeu de façon optimisé.
 
 ## Pistes d’algorithmes ou mécaniques à explorer
 
 | Objectif                                                               | Type                                  | Description / Référence                                                                                                                                                    |
 | ---------------------------------------------------------------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Importation auto d'un texte                                            |                                       | Annulé, surcharge de tavail suspectée                                                                                                                                      |
-| Génération automatique de niveaux                                      | **Algorithme procédural**             | Génération basée sur des paramètres (densité de désordre, plage de sections affectées). Inspiration : algorithmes de « shuffle ».                                          |
+| Génération automatique de niveaux                                      | **Algorithme procédural**             | Génération basée sur des paramètres (densité de désordre, plage de sections affectées). Inspiration : algorithmes de «&thinsp;shuffle&thinsp;».                                          |
 | Gestion de la popularité du fanclub                                    | **Système dynamique**                 | Décroissance continue modulée par actions (collecte d’objets, messages). Modélisable par une fonction mathématique (linéaire/exponentielle) avec événements modificateurs. |
 | Reconstruction du texte                                                | **Mécanique de tri / reconstitution** | Système de permutation de fragments pour remettre les languettes en ordre.                                                                                                 |
 | Éditeur de niveaux                                                     | **Outil intégré**                     | Interface pour ajuster les paramètres de génération du niveau.                                                                                                             |
