@@ -1,12 +1,4 @@
-Critères 
-
-Remise 
-
-- Avant la fin du cours du 9 octobre. 
-
-- Sur Léa, vous remettez un fichier texte « remise.txt » avec un lien vers votre dépôt de code. 
-
-- Sur GitHub, vous remplissez le formulaire « [Remise Git](http://remise.nicolasbourre.com/) ».
+Sur GitHub, vous remplissez le formulaire « [Remise Git](http://remise.nicolasbourre.com/) ».
 
 ------
 
