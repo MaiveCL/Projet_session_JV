@@ -1,14 +1,17 @@
 @startuml "État des bandes"
+!theme reddress-lightred
 
 mainframe  \n\t**État des bandes**\t\n
+
     state Attente : affichage seul
     state Selection : effet de surbrillance actif
     state Deplacement : gauche/droite
     state Contrat
 
+    [*] --> Attente
     Attente -> Selection : Clic\n[souris ou arcade]
     Selection -> Deplacement : fleches\n[gauche/droite ou arcade]
     Deplacement --> Selection :immobilisation\n[animation déplacement terminée]
     Selection -> Contrat :ajout à la collection\n[fait partie du contrat ?]
-
+    Contrat -> [*]
 @enduml
