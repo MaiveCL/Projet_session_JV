@@ -1,6 +1,6 @@
 @startuml "État des bandes"
 state attente : affichage seul
-state selectionne
+state selectionne : effet de surbrillance actif
 state deplacement : gauche/droite
 state Contrat
 
