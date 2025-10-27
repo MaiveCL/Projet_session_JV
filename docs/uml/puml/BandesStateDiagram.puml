@@ -6,9 +6,9 @@ mainframe  \n\t**État des bandes**\t\n
     state deplacement : gauche/droite
     state Contrat
 
-    attente -> selectionne : Clic\n[souris ou arcade]
-    selectionne -> deplacement : fleches\n[gauche/droite ou arcade]
-    deplacement --> selectionne :immobilisation\n[animation déplacement terminée]
-    selectionne -> Contrat :ajout à la collection\n[fait partie du contrat ?]
+    attente -> selection : Clic\n[souris ou arcade]
+    selection -> deplacement : fleches\n[gauche/droite ou arcade]
+    deplacement --> selection :immobilisation\n[animation déplacement terminée]
+    selection -> Contrat :ajout à la collection\n[fait partie du contrat ?]
 
 @enduml
