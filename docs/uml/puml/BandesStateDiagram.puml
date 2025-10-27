@@ -1,17 +1,44 @@
 @startuml "État des bandes"
-!theme reddress-lightred
-
-mainframe  \n\t**État des bandes**\t\n
+' Définir le style global
+skinparam {
+    backgroundColor #000000ff
+    shadowing true
+    FontName "Consolas"
+    ArrowColor #94a7e7ff
+    ArrowFontColor #bdcbfbff
+    StartColor #007acc
+    EndColor #bdcbfb
+}
+' Style pour les states
+skinparam state {
+    BackgroundColor #252526
+    fontColor #007acc
+    BorderColor #007acc
+    FontName "Consolas"
+    FontSize 12
+}
+<style>
+mainframe {
+  LineColor #007acc
+  LineThickness 2.0
+  FontColor #9ed1f3ff
+  FontSize 25
+  FontStyle italic
+  Margin 50
+  Padding 100
+}
+</style>
+mainframe \n\t**État des bandes**\t\n
 
     state Attente : affichage seul
     state Selection : effet de surbrillance actif
     state Deplacement : gauche/droite
     state Contrat
 
-    [*] --> Attente
-    Attente -> Selection : Clic\n[souris ou arcade]
-    Selection -> Deplacement : fleches\n[gauche/droite ou arcade]
-    Deplacement --> Selection :immobilisation\n[animation déplacement terminée]
+    [*] #BlueViolet --> Attente
+    Attente -> Selection : This is my disabled button Clic\n[souris ou arcade]
+    Selection -> Deplacement : fleches\n\t[gauche/droite ou arcade]\t
+    Deplacement --> Selection :immobilisation\n [animation déplacement terminée]
     Selection -> Contrat :ajout à la collection\n[fait partie du contrat ?]
-    Contrat -> [*]
+    Contrat -> [*] #BlueViolet
 @enduml
