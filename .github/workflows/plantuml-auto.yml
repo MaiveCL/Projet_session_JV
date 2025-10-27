@@ -19,8 +19,9 @@ jobs:
       - name: Generate UML diagrams
         run: |
           mkdir -p docs/uml
-          for f in $(find docs/uml/puml -name "*.puml"); do
-            plantuml -tpng "$f" -o docs/uml
+          cd docs/uml/puml
+          for f in *.puml; do
+            plantuml -tpng "$f" -o ../
           done
 
       - name: Commit and push
@@ -29,4 +30,4 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/uml/*.png
           git diff --cached --quiet || git commit -m "🔄 Update UML diagrams"
-          git push || echo "Nothing to push"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git || echo "Nothing to push"
