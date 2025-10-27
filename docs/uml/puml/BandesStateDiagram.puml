@@ -1,11 +1,14 @@
 @startuml "État des bandes"
-state attente : affichage seul
-state selectionne : effet de surbrillance actif
-state deplacement : gauche/droite
-state Contrat
 
-attente -> selectionne : Clic\n[souris ou arcade]
-selectionne -> deplacement : fleches\n[gauche/droite ou arcade]
-deplacement --> selectionne :immobilisation\n[animation déplacement terminée]
-selectionne -> Contrat :ajout à la collection\n[fait partie du contrat ?]
+mainframe  \n\t**État des bandes**\t\n
+    state attente : affichage seul
+    state selection : effet de surbrillance actif
+    state deplacement : gauche/droite
+    state Contrat
+
+    attente -> selectionne : Clic\n[souris ou arcade]
+    selectionne -> deplacement : fleches\n[gauche/droite ou arcade]
+    deplacement --> selectionne :immobilisation\n[animation déplacement terminée]
+    selectionne -> Contrat :ajout à la collection\n[fait partie du contrat ?]
+
 @enduml
