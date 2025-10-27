@@ -19,7 +19,7 @@ jobs:
       - name: Generate UML diagrams
         run: |
           mkdir -p docs/uml
-          for f in $(find . -name "*.puml" -not -path "./docs/*"); do
+          for f in $(find docs/uml/puml -name "*.puml"); do
             plantuml -tpng "$f" -o docs/uml
           done
 
