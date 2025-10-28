@@ -1,7 +1,7 @@
 @startuml "État des bandes"
 ' Définir le style global
 skinparam {
-    backgroundColor #000000ff
+    backgroundColor #252020ff
     shadowing true
     FontName "Consolas"
     ArrowColor #94a7e7ff
@@ -11,11 +11,12 @@ skinparam {
 }
 ' Style pour les states
 skinparam state {
-    BackgroundColor #252526
+    BackgroundColor #3e3e4eff
     fontColor #007acc
     BorderColor #007acc
     FontName "Consolas"
     FontSize 12
+    FontStyle bold
 }
 <style>
 mainframe {
@@ -30,15 +31,15 @@ mainframe {
 </style>
 mainframe \n\t**État des bandes**\t\n
 
-    state Attente : affichage seul
-    state Selection : effet de surbrillance actif
-    state Deplacement : gauche/droite
-    state Contrat
+    state ATTENTE : affichage seul
+    state SELECTION : effet de surbrillance actif
+    state DEPLACEMENT : gauche/droite
+    state CONTRAT
 
-    [*] #BlueViolet --> Attente
-    Attente -> Selection : This is my disabled button Clic\n[souris ou arcade]
-    Selection -> Deplacement : fleches\n\t[gauche/droite ou arcade]\t
-    Deplacement --> Selection :immobilisation\n [animation déplacement terminée]
-    Selection -> Contrat :ajout à la collection\n[fait partie du contrat ?]
-    Contrat -> [*] #BlueViolet
+    [*] #BlueViolet --> ATTENTE
+    ATTENTE -> SELECTION : This is my disabled button Clic\n[souris ou arcade]
+    SELECTION -> DEPLACEMENT : fleches\n\t[gauche/droite ou arcade]\t
+    DEPLACEMENT --> SELECTION :immobilisation\n [animation déplacement terminée]
+    SELECTION -> CONTRAT :ajout à la collection\n[fait partie du CONTRAT ?]
+    CONTRAT -> [*] #BlueViolet
 @enduml
