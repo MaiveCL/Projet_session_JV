@@ -1,33 +1,33 @@
 @startuml "État des bandes"
-' Définir le style global
-skinparam {
-    backgroundColor #000000ff
-    shadowing true
-    FontName "Consolas"
-    ArrowColor #94a7e7ff
-    ArrowFontColor #bdcbfbff
-    StartColor #007acc
-    EndColor #bdcbfb
-}
-' Style pour les states
-skinparam state {
-    BackgroundColor #252526
-    fontColor #007acc
-    BorderColor #007acc
-    FontName "Consolas"
-    FontSize 12
-}
-<style>
-mainframe {
-  LineColor #007acc
-  LineThickness 2.0
-  FontColor #9ed1f3ff
-  FontSize 25
-  FontStyle italic
-  Margin 50
-  Padding 100
-}
-</style>
+' ' Définir le style global
+' skinparam {
+'     backgroundColor #000000ff
+'     shadowing true
+'     FontName "Consolas"
+'     ArrowColor #94a7e7ff
+'     ArrowFontColor #bdcbfbff
+'     StartColor #007acc
+'     EndColor #bdcbfb
+' }
+' ' Style pour les states
+' skinparam state {
+'     BackgroundColor #252526
+'     fontColor #007acc
+'     BorderColor #007acc
+'     FontName "Consolas"
+'     FontSize 12
+' }
+' <style>
+' mainframe {
+'   LineColor #007acc
+'   LineThickness 2.0
+'   FontColor #9ed1f3ff
+'   FontSize 25
+'   FontStyle italic
+'   Margin 50
+'   Padding 100
+' }
+' </style>
 mainframe \n\t**État des bandes**\t\n
 
     state Attente : affichage seul
