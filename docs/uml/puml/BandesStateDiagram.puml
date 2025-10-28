@@ -37,7 +37,7 @@ mainframe \n\t**État des bandes**\t\n
     state CONTRAT
 
     [*] #BlueViolet --> ATTENTE
-    ATTENTE -> SELECTION : This is my disabled button Clic\n[souris ou arcade]
+    ATTENTE -> SELECTION : Choix d'une bande\n[souris ou arcade appuyé]
     SELECTION -> DEPLACEMENT : fleches\n\t[gauche/droite ou arcade]\t
     DEPLACEMENT --> SELECTION :immobilisation\n [animation déplacement terminée]
     SELECTION -> CONTRAT :ajout à la collection\n[fait partie du CONTRAT ?]
