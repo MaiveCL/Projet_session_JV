@@ -1,9 +1,9 @@
 @startuml "État des bandes"
 ' Définir le style global
 skinparam {
-    backgroundColor 007acc
+    backgroundColor 000000
     ' 007acc = oui
-    ' 92cc00ff = non
+    ' 92cc00ff = non, donne blanc ou ignoré
     shadowing true
     ' oui
     FontName "Consolas"
@@ -12,16 +12,17 @@ skinparam {
     ArrowFontColor 8598d6ff
     ' #8598d6ff
     StartColor ff02c4ff
-    ' #ff02c4ff
+    ' #ff02c4ff = non, ignoré ou noir
     EndColor ff02c4
-    ' #ff02c4
+    ' #ff02c4 = non, ignoré ou noir
 }
 ' Style pour les states
 skinparam state {
     BackgroundColor 3e3e4eff
-    ' #3e3e4eff
+    ' #3e3e4eff = non, ignoré ou blanc
     fontColor 007acc
     ' #007acc
+    BorderThickness 2.0
     BorderColor 007acc
     ' #007acc
     FontName "Consolas"
@@ -42,8 +43,9 @@ mainframe {
   ' non
   Padding 100
   ' non
-  backgroundColor 000000ff
-  ' #000000
+  backgroundColor 007acc
+  ' 000000ff
+  ' #000000 = non, ignoré
 }
 </style>
 mainframe \n\t**État des bandes**\t\n
@@ -64,6 +66,7 @@ mainframe \n\t**État des bandes**\t\n
 /'
 
 git add .
+git commit -m "test uml auto-export"
 git fetch origin
 git merge origin/main -m "merge avec le bot"
 git push
