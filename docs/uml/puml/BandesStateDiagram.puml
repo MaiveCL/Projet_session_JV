@@ -1,7 +1,7 @@
 @startuml "État des bandes"
 ' Définir le style global
 skinparam {
-    backgroundColor 000000
+    backgroundColor 000000ff
     ' #000000 = oui
     ' #007acc = oui
     ' 92cc00ff = non, donne blanc ou ignoré
