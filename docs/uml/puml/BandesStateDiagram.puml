@@ -1,10 +1,10 @@
 @startuml "État des bandes"
 ' Définir le style global
 skinparam {
-    backgroundColor 000000
+    backgroundColor 007acc
     ' #000000 = oui
     ' #007acc = oui
-    ' 92cc00ff = non, donne blanc ou ignoré
+    ' #92cc00ff = non, donne blanc ou ignoré
     shadowing true
     ' oui
     FontName "Consolas"
@@ -23,13 +23,14 @@ skinparam state {
     ' #3e3e4eff = non, ignoré ou blanc
     fontColor 007acc
     ' #007acc
-    BorderThickness 2.0
+    BorderThickness 2
     BorderColor 007acc
     ' #007acc
     FontName "Consolas"
     FontSize 12
     FontStyle bold
 }
+
 mainframe \n\t**État des bandes**\t\n
 
     state ATTENTE : affichage seul
@@ -42,7 +43,7 @@ mainframe \n\t**État des bandes**\t\n
     SELECTION -> DEPLACEMENT : fleches\n\t[gauche/droite ou arcade]\t
     DEPLACEMENT --> SELECTION :immobilisation\n [animation déplacement terminée]
     SELECTION -> CONTRAT :ajout à la collection\n[fait partie du CONTRAT ?]
-    CONTRAT -> [*] #007acc
+    CONTRAT -> [*]
 @enduml
 
 /'
