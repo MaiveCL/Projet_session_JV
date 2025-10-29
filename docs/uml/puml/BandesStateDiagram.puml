@@ -10,7 +10,8 @@ skinparam {
     EndColor #bdcbfb
 }
 ' Style pour les states
-skinparam state {
+<style>
+state {
     BackgroundColor #3e3e4eff
     fontColor #007acc
     BorderColor #007acc
@@ -18,7 +19,7 @@ skinparam state {
     FontSize 12
     FontStyle bold
 }
-<style>
+
 mainframe {
   LineColor #007acc
   LineThickness 2.0
@@ -27,6 +28,7 @@ mainframe {
   FontStyle italic
   Margin 50
   Padding 100
+  backgroundColor #000000ff
 }
 </style>
 mainframe \n\t**État des bandes**\t\n
@@ -34,7 +36,7 @@ mainframe \n\t**État des bandes**\t\n
     state ATTENTE : affichage seul
     state SELECTION : effet de surbrillance actif
     state DEPLACEMENT : gauche/droite
-    state CONTRAT
+    state CONTRAT : amortissement de la perte des fans
 
     [*] #BlueViolet --> ATTENTE
     ATTENTE -> SELECTION : Choix d'une bande\n[souris ou arcade appuyé]
