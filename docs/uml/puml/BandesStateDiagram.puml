@@ -1,19 +1,28 @@
 @startuml "État des bandes"
 ' Définir le style global
 skinparam {
-    backgroundColor 007acc
+    backgroundColor 007accff
+    ' #92cc00ff
     shadowing true
+    ' oui
     FontName "Consolas"
-    ArrowColor 94a7e7ff
-    ArrowFontColor bdcbfbff
-    StartColor 007acc
-    EndColor bdcbfb
+    ArrowColor ffffffff
+    ' #ffffffff
+    ArrowFontColor 8598d6ff
+    ' #8598d6ff
+    StartColor ff02c4ff
+    ' #ff02c4ff
+    EndColor ff02c4
+    ' #ff02c4
 }
 ' Style pour les states
 skinparam state {
     BackgroundColor 3e3e4eff
+    ' #3e3e4eff
     fontColor 007acc
+    ' #007acc
     BorderColor 007acc
+    ' #007acc
     FontName "Consolas"
     FontSize 12
     FontStyle bold
@@ -21,13 +30,19 @@ skinparam state {
 <style>
 mainframe {
   LineColor 007acc
+  ' #007acc
   LineThickness 2.0
   FontColor 9ed1f3ff
+  ' #9ed1f3ff
   FontSize 25
   FontStyle italic
+  ' non
   Margin 50
+  ' non
   Padding 100
-  backgroundColor black
+  ' non
+  backgroundColor 000000ff
+  ' #000000
 }
 </style>
 mainframe \n\t**État des bandes**\t\n
@@ -37,7 +52,7 @@ mainframe \n\t**État des bandes**\t\n
     state DEPLACEMENT : gauche/droite
     state CONTRAT : amortissement de la perte des fans
 
-    [*] #White --> ATTENTE
+    [*] --> ATTENTE
     ATTENTE -> SELECTION : Choix d'une bande\n[souris ou arcade appuyé]
     SELECTION -> DEPLACEMENT : fleches\n\t[gauche/droite ou arcade]\t
     DEPLACEMENT --> SELECTION :immobilisation\n [animation déplacement terminée]
