@@ -2,7 +2,8 @@
 ' Définir le style global
 skinparam {
     backgroundColor 000000
-    ' 007acc = oui
+    ' #000000 = oui
+    ' #007acc = oui
     ' 92cc00ff = non, donne blanc ou ignoré
     shadowing true
     ' oui
@@ -31,7 +32,7 @@ skinparam state {
 }
 <style>
 mainframe {
-  LineColor 007acc
+  LineColor #007acc
   ' #007acc
   LineThickness 2.0
   FontColor 9ed1f3ff
@@ -43,8 +44,9 @@ mainframe {
   ' non
   Padding 100
   ' non
-  backgroundColor 007acc
-  ' 000000ff
+  backgroundColor : #007acc
+  ' 007acc = non, ignoré
+  ' 000000ff = non, ignoré
   ' #000000 = non, ignoré
 }
 </style>
