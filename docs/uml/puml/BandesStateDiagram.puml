@@ -1,25 +1,25 @@
 @startuml "État des bandes"
 ' Définir le style global
 skinparam {
-    backgroundColor 000000ff
+    backgroundColor 000000
     ' #000000 = oui
     ' #007acc = oui
     ' 92cc00ff = non, donne blanc ou ignoré
     shadowing true
     ' oui
     FontName "Consolas"
-    ArrowColor ffffffff
+    ArrowColor ffffff
     ' #ffffffff
-    ArrowFontColor 8598d6ff
+    ArrowFontColor 8598d6
     ' #8598d6ff
-    StartColor ff02c4ff
+    StartColor ff02c4
     ' #ff02c4ff = non, ignoré ou noir
     EndColor ff02c4
     ' #ff02c4 = non, ignoré ou noir
 }
 ' Style pour les states
 skinparam state {
-    BackgroundColor 3e3e4eff
+    BackgroundColor 3e3e4e
     ' #3e3e4eff = non, ignoré ou blanc
     fontColor 007acc
     ' #007acc
@@ -30,26 +30,6 @@ skinparam state {
     FontSize 12
     FontStyle bold
 }
-<style>
-mainframe {
-  LineColor #007acc
-  ' #007acc
-  LineThickness 2.0
-  FontColor 9ed1f3ff
-  ' #9ed1f3ff
-  FontSize 25
-  FontStyle italic
-  ' non
-  Margin 50
-  ' non
-  Padding 100
-  ' non
-  backgroundColor : #007acc
-  ' 007acc = non, ignoré
-  ' 000000ff = non, ignoré
-  ' #000000 = non, ignoré
-}
-</style>
 mainframe \n\t**État des bandes**\t\n
 
     state ATTENTE : affichage seul
@@ -72,5 +52,26 @@ git commit -m "test uml auto-export"
 git fetch origin
 git merge origin/main -m "merge avec le bot"
 git push
+
+<style>
+mainframe {
+  LineColor #007acc
+  ' #007acc
+  LineThickness 2.0
+  FontColor 9ed1f3
+  ' #9ed1f3ff
+  FontSize 25
+  FontStyle italic
+  ' non
+  Margin 50
+  ' non
+  Padding 100
+  ' non
+  backgroundColor #007acc
+  ' 007acc = non, ignoré
+  ' 000000ff = non, ignoré
+  ' #000000 = non, ignoré
+}
+</style>
 
 '/
