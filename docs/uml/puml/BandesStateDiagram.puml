@@ -1,8 +1,9 @@
 @startuml "État des bandes"
 ' Définir le style global
 skinparam {
-    backgroundColor 007accff
-    ' #92cc00ff
+    backgroundColor 007acc
+    ' 007acc = oui
+    ' 92cc00ff = non
     shadowing true
     ' oui
     FontName "Consolas"
@@ -59,3 +60,12 @@ mainframe \n\t**État des bandes**\t\n
     SELECTION -> CONTRAT :ajout à la collection\n[fait partie du CONTRAT ?]
     CONTRAT -> [*] #007acc
 @enduml
+
+/'
+
+git add .
+git fetch origin
+git merge origin/main -m "merge avec le bot"
+git push
+
+'/
