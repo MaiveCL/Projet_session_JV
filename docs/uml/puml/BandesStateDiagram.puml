@@ -1,6 +1,7 @@
 @startuml "État des bandes"
 ' Définir le style global
 skinparam {
+    defaultFontColor 007acc
     backgroundColor 007acc
     ' #000000 = oui
     ' #007acc = oui
@@ -9,12 +10,12 @@ skinparam {
     ' oui
     FontName "Consolas"
     ArrowColor ffffff
-    ' #ffffffff
-    ArrowFontColor 8598d6
-    ' #8598d6ff
-    StartColor ff02c4
+    ' #ffffff
+    ArrowFontColor ffffff
+    ' #8598d6
+    ' StartColor ff02c4
     ' #ff02c4ff = non, ignoré ou noir
-    EndColor ff02c4
+    ' EndColor ff02c4
     ' #ff02c4 = non, ignoré ou noir
 }
 ' Style pour les states
