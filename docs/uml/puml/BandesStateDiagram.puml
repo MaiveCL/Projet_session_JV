@@ -1,7 +1,7 @@
 @startuml "État des bandes"
 ' Définir le style global
 skinparam {
-    defaultFontColor 007acc
+    defaultFontColor ffffff
     backgroundColor 007acc
     ' #000000 = oui
     ' #007acc = oui
