@@ -1,0 +1,3 @@
+magick -density 150 04_Maive_L-éveil-du-gouffre.pdf[0-90] -quality 90 page_%02d.png
+
+magick montage page_00.png page_01.png page_02.png page_03.png page_04.png page_05.png page_06.png page_07.png page_08.png page_09.png page_10.png page_11.png page_12.png page_13.png page_14.png page_15.png page_16.png page_17.png page_18.png page_19.png page_20.png page_21.png -tile x1 -geometry +0+0 chap1_total.png
