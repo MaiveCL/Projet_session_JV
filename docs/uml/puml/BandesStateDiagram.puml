@@ -48,6 +48,12 @@ mainframe \n\t**État des bandes**\t\n
 @enduml
 
 /'
+Ajouter aux options prévues : 
+en tout temps, si le joueur appuie sur un bouton 
+qu'il n'est pas sensé utiliser le nombre de fan 
+diminue de 10 par seconde ou la perte de fan est 
+multipliée par x
+
 
 git add .
 git commit -m "test uml auto-export"
