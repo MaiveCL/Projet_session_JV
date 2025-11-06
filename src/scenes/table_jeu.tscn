@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8v07me1ll0r"]
+
+[ext_resource type="Texture2D" uid="uid://310pbe6ar03r" path="res://assets/backgrounds/BoisBruleReduit.jpg" id="1_03tqe"]
+[ext_resource type="Shader" uid="uid://dejowivmmfls2" path="res://assets/shaders/perspective.gdshader" id="1_vdjkt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vdjkt"]
+shader = ExtResource("1_vdjkt")
+shader_parameter/perspective_factor = 0.5
+shader_parameter/enable_perspective = false
+
+[node name="TableJeu" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+material = SubResource("ShaderMaterial_vdjkt")
+repeat_size = Vector2(1625.5, 0)
+repeat_times = 2
+
+[node name="TextureTable" type="Sprite2D" parent="Parallax2D"]
+texture_repeat = 3
+use_parent_material = true
+position = Vector2(-250, 0)
+scale = Vector2(0.5, 0.38)
+texture = ExtResource("1_03tqe")
+centered = false

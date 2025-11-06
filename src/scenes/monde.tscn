@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3cim0mxktjgy"]
+
+[ext_resource type="PackedScene" uid="uid://c8v07me1ll0r" path="res://scenes/table_jeu.tscn" id="1_2ssnh"]
+[ext_resource type="PackedScene" uid="uid://c6pgdim8ij7gc" path="res://scenes/chapitre.tscn" id="2_u5tfm"]
+[ext_resource type="Texture2D" uid="uid://dxa5nvrbu3yhc" path="res://assets/sprites/chap1_total.png" id="3_13bj3"]
+[ext_resource type="Shader" uid="uid://crq03krwkd3sx" path="res://assets/shaders/shadow.gdshader" id="4_5o5ke"]
+[ext_resource type="Script" uid="uid://s4nrf038ba12" path="res://scripts/Auteur.cs" id="5_pguex"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pguex"]
+shader = ExtResource("4_5o5ke")
+shader_parameter/shadow_offset = Vector2(15, 15)
+shader_parameter/shadow_color = Color(0.11764706, 0, 0, 0.627451)
+
+[node name="Monde" type="Node2D"]
+
+[node name="TableJeu" parent="." instance=ExtResource("1_2ssnh")]
+
+[node name="Chapitre" parent="TableJeu" instance=ExtResource("2_u5tfm")]
+position = Vector2(0, 200)
+scale = Vector2(0.321, 0.321)
+BandeTexture = ExtResource("3_13bj3")
+ShadowMaterial = SubResource("ShaderMaterial_pguex")
+
+[node name="Auteur" type="Node2D" parent="."]
+y_sort_enabled = true
+script = ExtResource("5_pguex")
+VitessePlayer = 250.0
+
+[node name="Camera2D" type="Camera2D" parent="Auteur"]
+position = Vector2(577, 327)
+position_smoothing_enabled = true
