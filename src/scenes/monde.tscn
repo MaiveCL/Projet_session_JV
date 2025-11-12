@@ -14,6 +14,8 @@ shader_parameter/shadow_color = Color(0.11764706, 0, 0, 0.627451)
 [node name="Monde" type="Node2D"]
 
 [node name="TableJeu" parent="." instance=ExtResource("1_2ssnh")]
+position = Vector2(0, -266)
+scale = Vector2(2, 2)
 
 [node name="Chapitre" parent="TableJeu" instance=ExtResource("2_u5tfm")]
 position = Vector2(0, 200)
