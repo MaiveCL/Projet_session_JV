@@ -10,7 +10,6 @@ public partial class Chapitre : Node2D
 	[Export] public int HauteurBande;
 	[Export] public int Marge = 40;          // espace visuel entre bandes
 	[Export] public ShaderMaterial ShadowMaterial;
-	[Export] public float VitessePlayer = 800f;
 
 	public override void _Ready()
 	{

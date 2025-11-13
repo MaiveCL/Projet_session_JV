@@ -3,7 +3,7 @@ using System;
 
 public partial class Auteur : Node2D
 {
-	[Export] public float VitessePlayer = 200f;
+	[Export] public float VitessePlayer = 500;
 
 	public override void _Process(double delta)
 	{

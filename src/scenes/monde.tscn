@@ -22,13 +22,11 @@ position = Vector2(0, 200)
 scale = Vector2(0.321, 0.321)
 BandeTexture = ExtResource("3_13bj3")
 ShadowMaterial = SubResource("ShaderMaterial_pguex")
-VitessePlayer = 800.0
 
 [node name="Auteur" type="Node2D" parent="."]
 y_sort_enabled = true
 script = ExtResource("5_pguex")
-VitessePlayer = 250.0
+VitessePlayer = 500.0
 
 [node name="Camera2D" type="Camera2D" parent="Auteur"]
 position = Vector2(577, 327)
-position_smoothing_enabled = true
