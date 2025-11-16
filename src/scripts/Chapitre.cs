@@ -5,14 +5,16 @@ using System.Collections.Generic;
 public partial class Chapitre : Node2D
 {
 	[Export] public Texture2D BandeTexture;
-	[Export] public int NbBandes = 176;
-	[Export] public int LargeurBande;
-	[Export] public int HauteurBande;
+	public int NbPages = 22;
+	[Export] public int NbDechirures = 8;
+	public int LargeurBande;
+	public int HauteurBande;
 	[Export] public int Marge = 40;          // espace visuel entre bandes
 	[Export] public ShaderMaterial ShadowMaterial;
 
 	public override void _Ready()
 	{
+		int NbBandes = NbPages*NbDechirures;
 		LargeurBande = BandeTexture.GetWidth() / NbBandes;
 		HauteurBande = BandeTexture.GetHeight();
 
