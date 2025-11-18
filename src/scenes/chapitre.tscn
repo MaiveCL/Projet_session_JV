@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6pgdim8ij7gc"]
+[gd_scene load_steps=3 format=3 uid="uid://c6pgdim8ij7gc"]
 
 [ext_resource type="Script" uid="uid://dkkm5b2eewmd8" path="res://scripts/Chapitre.cs" id="1_lhlbu"]
+[ext_resource type="PackedScene" uid="uid://ciwyion7vou0k" path="res://scenes/BandeNode.tscn" id="2_tno2p"]
 
 [node name="Chapitre" type="Node2D"]
 script = ExtResource("1_lhlbu")
+BandeScenePacked = ExtResource("2_tno2p")

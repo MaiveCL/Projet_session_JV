@@ -23,6 +23,5 @@ repeat_times = 4
 [node name="TextureTable" type="Sprite2D" parent="Parallax2D"]
 texture_repeat = 3
 use_parent_material = true
-position = Vector2(-352, 0)
 texture = ExtResource("1_03tqe")
 centered = false

@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://ciwyion7vou0k"]
+
+[ext_resource type="Script" uid="uid://y158brae5f4u" path="res://scripts/BandeNode.cs" id="1_1htea"]
+[ext_resource type="Script" uid="uid://bgyi8w7imdqwb" path="res://scripts/States/StateMachine.cs" id="2_u0a3w"]
+[ext_resource type="Script" uid="uid://bx301gtyy7yqc" path="res://scripts/States/IdleState.cs" id="3_0u4xl"]
+[ext_resource type="Script" uid="uid://cap570xlxw2wo" path="res://scripts/States/MovingState.cs" id="4_jsr21"]
+[ext_resource type="Script" uid="uid://b335c4jydqdir" path="res://scripts/States/PooledState.cs" id="5_1sptd"]
+[ext_resource type="Script" uid="uid://c2vdtfumxa4er" path="res://scripts/States/CollectionState.cs" id="6_bbkxg"]
+
+[node name="BandeNode" type="Node2D"]
+script = ExtResource("1_1htea")
+
+[node name="ombrage" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="tranche" type="Sprite2D" parent="."]
+
+[node name="State Machine" type="Node" parent="."]
+script = ExtResource("2_u0a3w")
+
+[node name="IdleState" type="Node" parent="State Machine"]
+script = ExtResource("3_0u4xl")
+
+[node name="MovingState" type="Node" parent="State Machine"]
+script = ExtResource("4_jsr21")
+
+[node name="PooledState" type="Node" parent="State Machine"]
+script = ExtResource("5_1sptd")
+
+[node name="CollectionState" type="Node" parent="State Machine"]
+script = ExtResource("6_bbkxg")
