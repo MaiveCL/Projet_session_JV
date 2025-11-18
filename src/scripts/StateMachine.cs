@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public partial class StateMachine : Node
 {
+	[Export] public State InitialState;
 	private State currentState;
 	private Dictionary<string, State> states = new();
 
@@ -15,6 +16,13 @@ public partial class StateMachine : Node
 				states[st.Name] = st;
 				st.Transitioned += OnChildTransition;
 			}
+		}
+		
+		if (InitialState != null)
+		{
+			currentState = InitialState;
+			currentState.Enter();
+			return;
 		}
 	}
 
