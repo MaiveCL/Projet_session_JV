@@ -3,7 +3,7 @@ using System;
 
 public partial class State : Node
 {
-	public event Action<State, string> Transitioned;
+	public event Action<State, string> Transitioned; // observateur
 
 	public virtual void Enter() {}
 	public virtual void Exit() {}

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public partial class BandePool : Node
 {
-	[Export] public PackedScene BandeScene; // assigner res://BandeNode.tscn dans l'inspector si tu préfères
+	[Export] public PackedScene BandeScene;
 	private Queue<BandeNode> pool = new();
 
 	/// <summary>

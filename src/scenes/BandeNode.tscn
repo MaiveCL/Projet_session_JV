@@ -16,17 +16,17 @@ offset_bottom = 40.0
 
 [node name="tranche" type="Sprite2D" parent="."]
 
-[node name="State Machine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="tranche"]
 script = ExtResource("2_u0a3w")
 
-[node name="IdleState" type="Node" parent="State Machine"]
+[node name="IdleState" type="Node" parent="tranche/StateMachine"]
 script = ExtResource("3_0u4xl")
 
-[node name="MovingState" type="Node" parent="State Machine"]
+[node name="MovingState" type="Node" parent="tranche/StateMachine"]
 script = ExtResource("4_jsr21")
 
-[node name="PooledState" type="Node" parent="State Machine"]
+[node name="PooledState" type="Node" parent="tranche/StateMachine"]
 script = ExtResource("5_1sptd")
 
-[node name="CollectionState" type="Node" parent="State Machine"]
+[node name="CollectionState" type="Node" parent="tranche/StateMachine"]
 script = ExtResource("6_bbkxg")

@@ -3,40 +3,35 @@ using System;
 
 public partial class BandeNode : Node2D
 {
-	// Métadonnées
-	public int SourceId { get; private set; } = 0;   // index de la source d'image (0 = chap1)
+	/// Métadonnées
+	public int ChapitreId { get; private set; } = 0;   // index de la source d'image (0 = chap1)
 	public int FrameIndex { get; private set; } = 0; // index dans la sprite sheet (frame)
 	public int TotalHFrames { get; private set; } = 1;
 
-	// Références aux nœuds (trouvés au runtime)
+	/// noeuds
 	private ColorRect ombrage;
 	private Sprite2D tranche;
 	private StateMachine machine;
 
-	// Exports utiles si besoin (mais tu as demandé GetNode)
-	[Export] public float MoveSpeed = 200f;
-
 	public override void _Ready()
 	{
-		// récupérer les nodes existants (structure template)
+		// récupérer les nodes existants
 		ombrage = GetNode<ColorRect>("ombrage");
 		tranche = GetNode<Sprite2D>("tranche");
 		machine = tranche.GetNode<StateMachine>("StateMachine");
 
-		// (Optionnel) cacher tant qu'on configure
+		// cacher tant qu'on configure
 		Visible = true;
 	}
 
 	/// <summary>
-	/// Configure la bande après instantiation.
 	/// texture: sprite sheet
 	/// totalHFrames: nombre total de frames (NbBandes)
 	/// frameIndex: index assigné à cette bande
-	/// shadowMaterial: shader material à appliquer sur ombrage (peut être null)
 	/// </summary>
-	public void Configure(int sourceId, Texture2D texture, int totalHFrames, int frameIndex, ShaderMaterial shadowMaterial, Vector2 initialPosition, int largeurBande, int hauteurBande)
+	public void Configure(int ChapitreId, Texture2D texture, int totalHFrames, int frameIndex, ShaderMaterial shadowMaterial, Vector2 initialPosition, int largeurBande, int hauteurBande)
 	{
-		SourceId = sourceId;
+		ChapitreId = ChapitreId;
 		FrameIndex = frameIndex;
 		TotalHFrames = Math.Max(1, totalHFrames);
 
@@ -64,7 +59,6 @@ public partial class BandeNode : Node2D
 			ombrage.Position = Vector2.Zero;
 		}
 
-		// Ensure the state machine starts on Idle (or whatever it picks)
 		if (machine != null)
 			machine.ChangeState("Idle");
 	}
