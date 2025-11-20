@@ -8,7 +8,7 @@ public partial class BandePool : Node
 	private Queue<BandeNode> pool = new();
 
 	/// <summary>
-	/// Préchauffe le pool en instanciant count bandes via la factory.
+	/// Préchauffe le pool
 	/// Chaque instance est ajoutée comme enfant du pool et masquée.
 	/// </summary>
 	public void Prewarm(int count, Func<BandeNode> factory)

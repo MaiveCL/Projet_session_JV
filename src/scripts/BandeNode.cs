@@ -4,8 +4,8 @@ using System;
 public partial class BandeNode : Node2D
 {
 	/// Métadonnées
-	public int ChapitreId { get; private set; } = 0;   // index de la source d'image (0 = chap1)
-	public int FrameIndex { get; private set; } = 0; // index dans la sprite sheet (frame)
+	public int ChapitreId { get; private set; } = 0;
+	public int FrameIndex { get; private set; } = 0;
 	public int TotalHFrames { get; private set; } = 1;
 
 	/// noeuds
@@ -20,7 +20,6 @@ public partial class BandeNode : Node2D
 		tranche = GetNode<Sprite2D>("tranche");
 		machine = tranche.GetNode<StateMachine>("StateMachine");
 
-		// cacher tant qu'on configure
 		Visible = true;
 	}
 
@@ -29,16 +28,16 @@ public partial class BandeNode : Node2D
 	/// totalHFrames: nombre total de frames (NbBandes)
 	/// frameIndex: index assigné à cette bande
 	/// </summary>
-	public void Configure(int ChapitreId, Texture2D texture, int totalHFrames, int frameIndex, ShaderMaterial shadowMaterial, Vector2 initialPosition, int largeurBande, int hauteurBande)
+	public void Configure(int chapitreId, Texture2D texture, int totalHFrames, int frameIndex, ShaderMaterial shadowMaterial, Vector2 initialPosition, int largeurBande, int hauteurBande)
 	{
-		ChapitreId = ChapitreId;
+		ChapitreId = chapitreId;
 		FrameIndex = frameIndex;
-		TotalHFrames = Math.Max(1, totalHFrames);
+		TotalHFrames = totalHFrames;
 
 		// position initiale de la bande (local)
 		Position = initialPosition;
 
-		// configure slice / sprite
+		// configure tranche / sprite
 		if (tranche != null)
 		{
 			tranche.Texture = texture;
@@ -46,7 +45,7 @@ public partial class BandeNode : Node2D
 			tranche.Vframes = 1;
 			tranche.Frame = FrameIndex;
 			tranche.Centered = false;
-			tranche.Position = Vector2.Zero; // local inside this node
+			tranche.Position = Vector2.Zero;
 		}
 
 		// configure ombrage
@@ -63,7 +62,7 @@ public partial class BandeNode : Node2D
 			machine.ChangeState("Idle");
 	}
 
-	// API pour manipuler la bande depuis Chapitre / States
+	// manipuler la bande depuis Chapitre / States
 	public void SetFrame(int newFrame)
 	{
 		FrameIndex = newFrame;
