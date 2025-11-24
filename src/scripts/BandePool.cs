@@ -7,54 +7,20 @@ public partial class BandePool : Node
 	[Export] public PackedScene BandeScene;
 	private Queue<BandeNode> pool = new();
 
-	/// <summary>
-	/// Préchauffe le pool
-	/// Chaque instance est ajoutée comme enfant du pool et masquée.
-	/// </summary>
-	public void Prewarm(int count, Func<BandeNode> factory)
+	// Préchauffe le pool
+	// Chaque instance est ajoutée comme enfant du pool et masquée.
+	public void Prewarm(int count)
 	{
 		for (int i = 0; i < count; i++)
 		{
-			var b = factory();
+			var b = BandeScene.Instantiate<BandeNode>();
 			AddChild(b);
-			b.Visible = false;
 			pool.Enqueue(b);
 		}
-	}
-
-	/// <summary>
-	/// Récupère une bande du pool ou en crée une nouvelle.
-	/// </summary>
-	public BandeNode GetOrCreate(Func<BandeNode> factory)
-	{
-		if (pool.Count > 0)
-		{
-			var b = pool.Dequeue();
-			b.Visible = true;
-			return b;
-		}
-		else
-		{
-			var b = factory();
-			AddChild(b);
-			return b;
-		}
-	}
-
-	/// <summary>
-	/// Retourne une bande au pool.
-	/// </summary>
-	public void Return(BandeNode b)
-	{
-		if (b == null) return;
-		b.Visible = false;
-		pool.Enqueue(b);
 	}
 }
 
 /*
-
----
 
 Au lieu de tirer des balles à travers un écran avec un canon :
 Un auteur, invisible et toujours caméras centré, 
@@ -71,7 +37,5 @@ Mes bandes ont des états :
 - Puis l'état Collection. Pour entrer dans cet état il faut avoir sélectionné une bande et l'avoir envoyé vers le haut ou vers le bas ET que cette bande soit marquée comme pouvant faire partie de la collection "contratEdition".
 
 J'ai déjà des nodes de states machines et du code, mais le code fait pitié. Allons-y étape par étape. Par exemple on commence par intégrer la logique pour suivre l'index le plus proche du joueur.
-
-
 
 */

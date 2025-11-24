@@ -19,8 +19,6 @@ public partial class BandeNode : Node2D
 		ombrage = GetNode<ColorRect>("ombrage");
 		tranche = GetNode<Sprite2D>("tranche");
 		machine = tranche.GetNode<StateMachine>("StateMachine");
-
-		Visible = true;
 	}
 
 	/// <summary>

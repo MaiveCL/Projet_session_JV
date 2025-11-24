@@ -1,10 +1,3 @@
-/*
-	
-	Algo de bande pooling
-	utiliser le state poolled state ?
-	utiliser le state Moving state pour calculer les 2 limites ?
-	calculer les 2 limites en début de partie selon la taille de l'écran ?
-*/
 using Godot;
 using System;
 using System.Collections.Generic;
@@ -17,8 +10,8 @@ public partial class Chapitre : Node2D
 	[Export] public string TexturePath = "res://assets/sprites/chap1_total.png";
 	public Texture2D BandeTexture;
 
-	public int NbPages = 22;
-	[Export] public int NbDechirures = 8;
+	public int NbPages = 22; // faire une fonction dans le futur pour déterminer le nombre de pages
+	[Export] public int NbTranches = 8;
 	public int LargeurBande;
 	public int HauteurBande;
 	[Export] public int Marge = 40;          // espace visuel entre bandes
@@ -33,7 +26,7 @@ public partial class Chapitre : Node2D
 		BandeTexture = ResourceLoader.Load<Texture2D>(TexturePath);
 
 		// Calculer la largeur et hauteur d'une bande
-		int NbBandes = NbPages * NbDechirures;
+		int NbBandes = NbPages * NbTranches;
 		LargeurBande = BandeTexture.GetWidth() / NbBandes;
 		HauteurBande = BandeTexture.GetHeight();
 
@@ -42,15 +35,7 @@ public partial class Chapitre : Node2D
 		pool.BandeScene = BandeScenePacked;
 		AddChild(pool);
 
-		// Factory : fonction pour créer une bande si le pool est vide
-		Func<BandeNode> factory = () =>
-		{
-			return BandeScenePacked.Instantiate<BandeNode>();
-		};
-
-		// Préchauffer le pool avec le nombre exact de bandes
-		// Ici toutes les bandes sont instanciées et mises invisibles dans le pool
-		pool.Prewarm(PoolSize, factory);
+		pool.Prewarm(PoolSize);
 
 		// Générer un ordre aléatoire pour mélanger les bandes
 		var indices = new List<int>();
@@ -66,19 +51,20 @@ public partial class Chapitre : Node2D
 		}
 
 		// Instancier les bandes à partir du pool et les configurer
-		for (int i = 0; i < NbBandes; i++)
+		var bandes = pool.GetChildren().OfType<BandeNode>().ToList(); // ou IEnumerable, peu importe
+
+		for (int i = 0; i < bandes.Count; i++)
 		{
-			var bande = pool.GetOrCreate(factory); // prend une bande du pool ou en crée une nouvelle
-			bande.Visible = true; // rend la bande visible
+			var bande = bandes[i];
 
-			int frameAssigned = indices[i]; // quelle tranche afficher
-			int sourceId = 0; // ici, une seule source d'image
+			// On recycle les tranches : modulo NbBandes pour ne jamais dépasser
+			int frameAssigned = indices[i % NbBandes];
 
-			Vector2 pos = new Vector2(i * LargeurBande + i * Marge, 0); // position de départ
+			Vector2 pos = new Vector2(i * LargeurBande + i * Marge, 0);
 
-			// configure la bande (texture, frame, shader, position, taille)
-			bande.Configure(sourceId, BandeTexture, NbBandes, frameAssigned, ShadowMaterial, pos, LargeurBande, HauteurBande);
+			bande.Configure(0, BandeTexture, NbBandes, frameAssigned, ShadowMaterial, pos, LargeurBande, HauteurBande);
 		}
+
 	}
 
 	public override void _Process(double delta)

@@ -11,7 +11,7 @@ public partial class GenericPool<T> : Node where T : CanvasItem
 
 	public override void _Ready()
 	{
-		for (int i = 0; i < PoolSize i++)
+		for (int i = 0; i < PoolSize; i++)
 		{
 			var obj = Scene.Instantiate() as T;
 			AddChild(obj);
