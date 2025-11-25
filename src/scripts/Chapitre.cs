@@ -75,6 +75,7 @@ public partial class Chapitre : Node2D
 		if (Input.IsActionJustPressed("hasard"))
 		{
 			ShuffleOrdre(ordreBandes);
+			ReassignerPool(bandesPool, ordreBandes);
 			
 		}
 	}
