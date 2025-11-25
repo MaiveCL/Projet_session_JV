@@ -15,6 +15,7 @@ shader_parameter/shadow_color = Color(0.11764706, 0, 0, 0.627451)
 [node name="TableJeu" parent="." instance=ExtResource("1_2ssnh")]
 
 [node name="Chapitre" parent="TableJeu" instance=ExtResource("2_u5tfm")]
+PoolSize = 20
 ShadowMaterial = SubResource("ShaderMaterial_pguex")
 
 [node name="Auteur" type="Node2D" parent="."]

@@ -6,22 +6,25 @@ using System.Linq;
 public partial class Chapitre : Node2D
 {
 	[Export] public int PoolSize = 20; // nombre de bandes dans le pool via l'inspecteur
-	// Chemin vers l'image totale du chapitre
 	[Export] public string TexturePath = "res://assets/sprites/chap1_total.png";
+	
 	public Texture2D BandeTexture;
 
 	public int NbPages = 22; // faire une fonction dans le futur pour déterminer le nombre de pages
 	[Export] public int NbTranches = 8;
+	
 	public int LargeurBande;
 	public int HauteurBande;
+	
 	[Export] public int Marge = 40;          // espace visuel entre bandes
 	[Export] public ShaderMaterial ShadowMaterial;
 
 	[Export] public PackedScene BandeScenePacked; // Scene de bande à instancier
+	
 	private BandePool pool; // notre pool de bandes
 	private List<BandeNode> bandesPool;
 	
-	var ordreBandes = new List<int>();
+	private List<int> ordreBandes;
 	
 	public override void _Ready()
 	{
@@ -39,35 +42,31 @@ public partial class Chapitre : Node2D
 		AddChild(pool);
 
 		pool.Prewarm(PoolSize);
+		// Récupérer les BandeNode du pool
+		bandesPool = pool.GetChildren().OfType<BandeNode>().ToList();
 
+		// Créer et mémoriser l’ordre logique
+		ordreBandes = Enumerable.Range(0, NbBandes).ToList();
+		ShuffleOrdre(ordreBandes);
 
-
-		for (int i = 0; i < NbBandes; i++) indices.Add(i);
-
-		var rand = new Random();
-		for (int i = indices.Count - 1; i > 0; i--)
+		// Configurer les PoolSize bandes visibles
+		for (int i = 0; i < bandesPool.Count; i++)
 		{
-			int j = rand.Next(i + 1);
-			int tmp = indices[i];
-			indices[i] = indices[j];
-			indices[j] = tmp;
-		}
-
-		// Instancier les bandes à partir du pool et les configurer
-		var bandes = pool.GetChildren().OfType<BandeNode>().ToList(); // ou IEnumerable, peu importe
-
-		for (int i = 0; i < bandes.Count; i++)
-		{
-			var bande = bandes[i];
-
-			// On recycle les tranches : modulo NbBandes pour ne jamais dépasser
-			int frameAssigned = indices[i % NbBandes];
-
+			var bande = bandesPool[i];
+			int frame = ordreBandes[i % NbBandes];
 			Vector2 pos = new Vector2(i * LargeurBande + i * Marge, 0);
 
-			bande.Configure(0, BandeTexture, NbBandes, frameAssigned, ShadowMaterial, pos, LargeurBande, HauteurBande);
+			bande.Configure(
+				0,
+				BandeTexture,
+				NbBandes,
+				frame,
+				ShadowMaterial,
+				pos,
+				LargeurBande,
+				HauteurBande
+			);
 		}
-
 	}
 
 	public override void _Process(double delta)
@@ -75,50 +74,44 @@ public partial class Chapitre : Node2D
 		// Debug : appuyer sur "hasard" pour réinitialiser et mélanger les bandes
 		if (Input.IsActionJustPressed("hasard"))
 		{
-			ResetAndShuffle();
+			ShuffleOrdre(ordreBandes);
+			
 		}
 	}
 
-	/// <summary>
-	/// Remet les bandes au pool et les réinstancie avec un nouvel ordre
-	/// </summary>
-	private void ResetAndShuffle()
+	private void ShuffleOrdre(List<int> ordre)
 	{
-		// 1. Récolter les bandes existantes
-		var bandes = new List<BandeNode>();
-		foreach (Node child in GetChildren())
-			if (child is BandeNode b)
-				bandes.Add(b);
-
-		int NbBandes = bandes.Count;
-
-		// 2. Générer les nouveaux index mélangés
-		var indices = Enumerable.Range(0, NbBandes).ToList();
 		var rand = new Random();
-		for (int i = indices.Count - 1; i > 0; i--)
+		for (int i = ordre.Count - 1; i > 0; i--)
 		{
 			int j = rand.Next(i + 1);
-			(indices[i], indices[j]) = (indices[j], indices[i]);
+			(ordre[i], ordre[j]) = (ordre[j], ordre[i]);
 		}
+	}
+	
+	private void ReassignerPool(List<BandeNode> pool, List<int> ordre, int? targetIndex = null)
+	{
+		int NbBandes = NbPages * NbTranches;
 
-		// 3. Réassigner les bandes existantes
-		for (int i = 0; i < NbBandes; i++)
+		if (targetIndex.HasValue)
 		{
-			var bande = bandes[i];
-
-			int frameAssigned = indices[i];
+			int i = targetIndex.Value % pool.Count;
+			var bande = pool[i];
+			int frame = ordre[i % NbBandes];
 			Vector2 pos = new Vector2(i * LargeurBande + i * Marge, 0);
 
-			bande.Configure(
-				0,
-				BandeTexture,
-				NbBandes,
-				frameAssigned,
-				ShadowMaterial,
-				pos,
-				LargeurBande,
-				HauteurBande
-			);
+			bande.Configure(0, BandeTexture, NbBandes, frame, ShadowMaterial, pos, LargeurBande, HauteurBande);
+		}
+		else
+		{
+			for (int i = 0; i < pool.Count; i++)
+			{
+				var bande = pool[i];
+				int frame = ordre[i % NbBandes];
+				Vector2 pos = new Vector2(i * LargeurBande + i * Marge, 0);
+
+				bande.Configure(0, BandeTexture, NbBandes, frame, ShadowMaterial, pos, LargeurBande, HauteurBande);
+			}
 		}
 	}
 }
