@@ -42,7 +42,7 @@ public partial class BandeNode : Node2D
 			tranche.Hframes = TotalHFrames;
 			tranche.Vframes = 1;
 			tranche.Frame = FrameIndex;
-			tranche.Centered = false;
+			tranche.Centered = true;
 			tranche.Position = Vector2.Zero;
 		}
 
@@ -53,7 +53,7 @@ public partial class BandeNode : Node2D
 			if (shadowMaterial != null)
 				ombrage.Material = shadowMaterial;
 			ombrage.Color = new Color(1, 1, 1, 0);
-			ombrage.Position = Vector2.Zero;
+			//ombrage.Position = Vector2.Zero;
 		}
 
 		if (machine != null)

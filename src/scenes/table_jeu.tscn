@@ -24,4 +24,3 @@ repeat_times = 4
 texture_repeat = 3
 use_parent_material = true
 texture = ExtResource("1_03tqe")
-centered = false

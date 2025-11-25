@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 public partial class BandePool : Node
@@ -14,8 +15,19 @@ public partial class BandePool : Node
 		for (int i = 0; i < count; i++)
 		{
 			var b = BandeScene.Instantiate<BandeNode>();
+			b.Visible = false;   // ← important
 			AddChild(b);
 			pool.Enqueue(b);
 		}
 	}
+	
+	public Vector2 GetCenterPosition()
+	{
+		if (pool.Count == 0) return Vector2.Zero;
+		var liste = pool.ToList();
+		var gauche = liste.OrderBy(b => b.GlobalPosition.X).First();
+		var droite = liste.OrderBy(b => b.GlobalPosition.X).Last();
+		return (gauche.GlobalPosition + droite.GlobalPosition) / 2;
+	}
+
 }
