@@ -5,7 +5,7 @@ using System.Linq;
 
 public partial class Chapitre : Node2D
 {
-	[Export] public int PoolSize = 10; // nombre de bandes dans le pool via l'inspecteur
+	[Export] public int PoolSize = 20; // nombre de bandes dans le pool via l'inspecteur
 	// Chemin vers l'image totale du chapitre
 	[Export] public string TexturePath = "res://assets/sprites/chap1_total.png";
 	public Texture2D BandeTexture;
@@ -19,7 +19,10 @@ public partial class Chapitre : Node2D
 
 	[Export] public PackedScene BandeScenePacked; // Scene de bande à instancier
 	private BandePool pool; // notre pool de bandes
-
+	private List<BandeNode> bandesPool;
+	
+	var ordreBandes = new List<int>();
+	
 	public override void _Ready()
 	{
 		// Charger la texture principale du chapitre
@@ -37,8 +40,8 @@ public partial class Chapitre : Node2D
 
 		pool.Prewarm(PoolSize);
 
-		// Générer un ordre aléatoire pour mélanger les bandes
-		var indices = new List<int>();
+
+
 		for (int i = 0; i < NbBandes; i++) indices.Add(i);
 
 		var rand = new Random();
