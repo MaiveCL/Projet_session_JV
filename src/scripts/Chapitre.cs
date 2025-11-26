@@ -182,7 +182,7 @@ public partial class Chapitre : Node2D
 				droite.GlobalPosition.Y
 			);
 
-			// Optionnel : réassigner frame si tu veux suivre ordreBandes
+			// réassigner l'index dans frame
 			int newIndex = (ordreBandes.IndexOf(droite.FrameIndex) - bandesPool.Count + ordreBandes.Count) % ordreBandes.Count;
 			droite.SetFrame(ordreBandes[newIndex]);
 		}
@@ -201,5 +201,4 @@ public partial class Chapitre : Node2D
 			gauche.SetFrame(ordreBandes[newIndex]);
 		}
 	}
-
 }
