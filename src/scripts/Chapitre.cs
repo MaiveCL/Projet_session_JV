@@ -120,6 +120,7 @@ public partial class Chapitre : Node2D
 			ShuffleOrdre(ordreBandes);
 			ReassignerPool(bandesPool, ordreBandes);
 		}
+		RecycleBandes();
 	}
 
 	private void ShuffleOrdre(List<int> ordre)
@@ -157,4 +158,48 @@ public partial class Chapitre : Node2D
 			}
 		}
 	}
+	
+	private void RecycleBandes()
+	{
+		var joueur = GetNode<Node2D>("/root/Monde/Auteur");
+		Vector2 posJoueur = joueur.GlobalPosition;
+
+		var bandesGauche = bandesPool.Count(b => b.GlobalPosition.X < posJoueur.X);
+		var bandesDroite = bandesPool.Count(b => b.GlobalPosition.X >= posJoueur.X);
+
+		// On ne fait rien si équilibré
+		if (Math.Abs(bandesGauche - bandesDroite) < 2)
+			return;
+
+		if (bandesDroite > bandesGauche)
+		{
+			// Déplacer la bande la plus à droite vers la gauche
+			var droite = bandesPool.OrderByDescending(b => b.GlobalPosition.X).First();
+			var gauche = bandesPool.OrderBy(b => b.GlobalPosition.X).First();
+
+			droite.GlobalPosition = new Vector2(
+				gauche.GlobalPosition.X - LargeurBande - Marge,
+				droite.GlobalPosition.Y
+			);
+
+			// Optionnel : réassigner frame si tu veux suivre ordreBandes
+			int newIndex = (ordreBandes.IndexOf(droite.FrameIndex) - bandesPool.Count + ordreBandes.Count) % ordreBandes.Count;
+			droite.SetFrame(ordreBandes[newIndex]);
+		}
+		else
+		{
+			// Déplacer la bande la plus à gauche vers la droite
+			var gauche = bandesPool.OrderBy(b => b.GlobalPosition.X).First();
+			var droite = bandesPool.OrderByDescending(b => b.GlobalPosition.X).First();
+
+			gauche.GlobalPosition = new Vector2(
+				droite.GlobalPosition.X + LargeurBande + Marge,
+				gauche.GlobalPosition.Y
+			);
+
+			int newIndex = (ordreBandes.IndexOf(gauche.FrameIndex) + bandesPool.Count) % ordreBandes.Count;
+			gauche.SetFrame(ordreBandes[newIndex]);
+		}
+	}
+
 }
