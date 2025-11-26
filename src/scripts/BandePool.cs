@@ -15,7 +15,7 @@ public partial class BandePool : Node
 		for (int i = 0; i < count; i++)
 		{
 			var b = BandeScene.Instantiate<BandeNode>();
-			b.Visible = false;   // ← important
+			b.Visible = false;   // pour éviter des bugs d'affichage
 			AddChild(b);
 			pool.Enqueue(b);
 		}
@@ -25,9 +25,17 @@ public partial class BandePool : Node
 	{
 		if (pool.Count == 0) return Vector2.Zero;
 		var liste = pool.ToList();
-		var gauche = liste.OrderBy(b => b.GlobalPosition.X).First();
 		var droite = liste.OrderBy(b => b.GlobalPosition.X).Last();
-		return (gauche.GlobalPosition + droite.GlobalPosition) / 2;
+		return (GetGauche() + droite.GlobalPosition) / 2;
 	}
+	
+	public Vector2 GetGauche()
+	{
+		if (pool.Count == 0) return Vector2.Zero;
+		var liste = pool.ToList();
+		var gauche = liste.OrderBy(b => b.GlobalPosition.X).First();
+		return gauche.GlobalPosition;
+	}
+	
 
 }

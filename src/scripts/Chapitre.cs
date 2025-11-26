@@ -108,7 +108,6 @@ public partial class Chapitre : Node2D
 			);
 			bande.Visible = true;
 		}
-		CenterChapitre();
 		var joueur = GetNode<Node2D>("/root/Monde/Auteur");
 		joueur.GlobalPosition = pool.GetCenterPosition();
 		// ---------------------------------------------------
@@ -158,22 +157,4 @@ public partial class Chapitre : Node2D
 			}
 		}
 	}
-	
-	public void CenterChapitre()
-	{
-		if (bandesPool == null || bandesPool.Count == 0) return;
-
-		// Positions locales au lieu de globales
-		float minX = bandesPool.Min(b => b.Position.X);
-		float maxX = bandesPool.Max(b => b.Position.X);
-		float minY = bandesPool.Min(b => b.Position.Y);
-		float maxY = bandesPool.Max(b => b.Position.Y);
-
-		Vector2 boundingCenter = new Vector2((minX + maxX) / 2, (minY + maxY) / 2);
-		Vector2 viewportCenter = GetViewport().GetVisibleRect().Size / 2;
-
-		// Décaler Chapitre pour centrer les bandes
-		Position += viewportCenter - boundingCenter;
-	}
-
 }

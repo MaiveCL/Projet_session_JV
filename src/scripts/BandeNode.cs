@@ -54,6 +54,8 @@ public partial class BandeNode : Node2D
 				ombrage.Material = shadowMaterial;
 			ombrage.Color = new Color(1, 1, 1, 0);
 			//ombrage.Position = Vector2.Zero;
+			ombrage.Position = new Vector2(-largeurBande / 2f, -hauteurBande / 2f);
+
 		}
 
 		if (machine != null)
