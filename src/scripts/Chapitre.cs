@@ -5,7 +5,12 @@ using System.Linq;
 
 public partial class Chapitre : Node2D
 {
-	private const float MARGE_HAUTE = 20f; // marge fixe en haut
+	// suivit de la bande la plus proche du joueur
+	private const float OFFSET_SELECTION = 40f;
+	private BandeNode bandeProche;
+	public BandeNode BandeProche => bandeProche;
+
+	public const float MARGE_HAUTE = 20f; // marge fixe en haut
 	public int PoolSize = 20; // remplacer par pool.bullet_pool.Count
 	[Export] public string TexturePath = "res://assets/sprites/chap1_total.png";
 	
@@ -24,6 +29,7 @@ public partial class Chapitre : Node2D
 	
 	private BandePool pool; // notre pool de bandes
 	private List<BandeNode> bandesPool;
+	public List<BandeNode> BandesPool => bandesPool;
 	
 	private List<int> ordreBandes;
 	
@@ -110,7 +116,51 @@ public partial class Chapitre : Node2D
 		}
 		var joueur = GetNode<Node2D>("/root/Monde/Auteur");
 		joueur.GlobalPosition = pool.GetCenterPosition();
+		AppliquerEtatInitiale();
 		// ---------------------------------------------------
+	}
+	
+	private void AppliquerEtatInitiale()
+	{
+		foreach (var bande in bandesPool)
+		{
+			var machine = bande.GetStateMachine();
+
+			if (machine != null)
+			{
+				machine.ChangeState("IdleState");
+			}
+		}
+	}
+	
+	public void MettreAJourBandeProche()
+	{
+		var joueur = GetNode<Node2D>("/root/Monde/Auteur");
+		
+		BandeNode nouvelle = bandesPool
+		.OrderBy(b => Mathf.Abs(b.GlobalPosition.X - joueur.GlobalPosition.X))
+		.First();
+
+		if (nouvelle == bandeProche)
+			return; // rien n’a changé → on sort
+
+		// Réinitialiser l’ancienne
+		if (bandeProche != null)
+		{
+			Vector2 pos = bandeProche.Position;
+			pos.Y = MARGE_HAUTE;
+			bandeProche.Position = pos;
+			bandeProche.ShowShadow(false);
+		}
+
+		// Affecter la nouvelle
+		bandeProche = nouvelle;
+
+		// La surélever
+		Vector2 newPos = bandeProche.Position;
+		newPos.Y = MARGE_HAUTE - OFFSET_SELECTION;
+		bandeProche.Position = newPos;
+		bandeProche.ShowShadow(true);
 	}
 
 	public override void _Process(double delta)

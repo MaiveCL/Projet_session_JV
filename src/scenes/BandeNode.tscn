@@ -17,8 +17,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="tranche" type="Sprite2D" parent="."]
 
-[node name="StateMachine" type="Node" parent="tranche"]
+[node name="StateMachine" type="Node" parent="tranche" node_paths=PackedStringArray("InitialState")]
 script = ExtResource("2_u0a3w")
+InitialState = NodePath("IdleState")
 
 [node name="IdleState" type="Node" parent="tranche/StateMachine"]
 script = ExtResource("3_0u4xl")

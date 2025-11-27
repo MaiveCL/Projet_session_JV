@@ -82,10 +82,10 @@ public partial class BandeNode : Node2D
 		return 0f;
 	}
 
-	public void ShowShadow(bool enabled)
+	public void ShowShadow(bool value)
 	{
 		if (ombrage != null)
-			ombrage.Color = enabled ? new Color(0, 0, 0, 0.5f) : new Color(1, 1, 1, 0);
+			ombrage.Visible = value;
 	}
 
 	public StateMachine GetStateMachine()

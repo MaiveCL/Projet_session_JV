@@ -3,6 +3,7 @@ using System;
 
 public partial class Auteur : Node2D
 {
+	public bool IsMoving { get; private set; }
 	[Export] public float VitessePlayer = 1000;
 	public BandeNode BandeProche { get; private set; }
 
@@ -10,10 +11,12 @@ public partial class Auteur : Node2D
 	{
 		Vector2 move = Vector2.Zero;
 
-		if (Input.IsActionPressed("ui_right"))
+		if (Input.IsActionPressed("right"))
 			move.X += VitessePlayer * (float)delta;
-		if (Input.IsActionPressed("ui_left"))
+		if (Input.IsActionPressed("left"))
 			move.X -= VitessePlayer * (float)delta;
+			
+		IsMoving = move != Vector2.Zero;
 
 		Position += move;
 	}

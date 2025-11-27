@@ -5,7 +5,6 @@ public partial class IdleState : State
 	public override void Enter()
 	{
 		var b = GetBandeNode();
-		// idle: s'assurer visible et ombre désactivée
 		if (b != null)
 		{
 			b.Visible = true;
@@ -15,6 +14,20 @@ public partial class IdleState : State
 
 	public override void Update(double delta)
 	{
-		// comportement idle minimal (ou animations légères)
+		var chapitre = GetNode<Chapitre>("/root/Monde/TableJeu/Chapitre");
+		var joueur = chapitre?.GetNode<Auteur>("/root/Monde/Auteur");
+
+		if (chapitre != null && joueur.IsMoving)
+		{
+			chapitre.MettreAJourBandeProche();
+		}
+		
+		if (Input.IsActionJustPressed("up") && chapitre.BandeProche != null)
+		{
+			var machine = chapitre.BandeProche.GetStateMachine();
+			if (machine != null)
+				machine.ChangeState("MovingState");
+		}
 	}
+
 }
