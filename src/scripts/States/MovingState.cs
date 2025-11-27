@@ -61,6 +61,29 @@ public partial class MovingState : State
 				// mettre à jour la position libre pour la prochaine collision
 				positionLibreX = ancienneX;
 			}
+			
+			// --- Lâcher de la bande ---
+			if (Input.IsActionJustReleased("down"))
+			{
+				FinaliserDepot(b, chapitre);
+				return;
+			}
+
 		}
 	}
+	
+	private void FinaliserDepot(BandeNode b, Chapitre chapitre)
+	{
+		// 1. Placer la bande à la position libre finale
+		b.Position = new Vector2(positionLibreX, b.Position.Y);
+
+		// 2. Réinitialiser la taille
+		b.Scale = Vector2.One;
+
+		// 3. Changer d'état
+		var machine = b.GetStateMachine();
+		if (machine != null)
+			machine.ChangeState("IdleState");
+	}
+
 }

@@ -6,7 +6,6 @@ using System.Linq;
 public partial class Chapitre : Node2D
 {
 	// suivit de la bande la plus proche du joueur
-	private const float OFFSET_SELECTION = 40f;
 	private BandeNode bandeProche;
 	public BandeNode BandeProche => bandeProche;
 
@@ -116,22 +115,28 @@ public partial class Chapitre : Node2D
 		}
 		var joueur = GetNode<Node2D>("/root/Monde/Auteur");
 		joueur.GlobalPosition = pool.GetCenterPosition();
-		AppliquerEtatInitiale();
+		bandeProche = bandesPool
+		.OrderBy(b => Mathf.Abs(b.GlobalPosition.X - joueur.GlobalPosition.X))
+		.First();
+		AppliquerEtatInitiale(bandeProche);
 		// ---------------------------------------------------
 	}
 	
-	private void AppliquerEtatInitiale()
-	{
-		foreach (var bande in bandesPool)
+		private void AppliquerEtatInitiale(BandeNode bandeIdle = null)
 		{
-			var machine = bande.GetStateMachine();
-
-			if (machine != null)
+			foreach (var bande in bandesPool)
 			{
-				machine.ChangeState("IdleState");
+				var machine = bande.GetStateMachine();
+
+				if (machine != null)
+				{
+					if (bande == bandeIdle)
+						machine.ChangeState("IdleState");
+					else
+						machine.ChangeState("NullState");
+				}
 			}
 		}
-	}
 	
 	public void MettreAJourBandeProche()
 	{
@@ -144,23 +149,8 @@ public partial class Chapitre : Node2D
 		if (nouvelle == bandeProche)
 			return; // rien n’a changé → on sort
 
-		// Réinitialiser l’ancienne
-		if (bandeProche != null)
-		{
-			Vector2 pos = bandeProche.Position;
-			pos.Y = MARGE_HAUTE;
-			bandeProche.Position = pos;
-			bandeProche.ShowShadow(false);
-		}
-
 		// Affecter la nouvelle
 		bandeProche = nouvelle;
-
-		// La surélever
-		Vector2 newPos = bandeProche.Position;
-		newPos.Y = MARGE_HAUTE - OFFSET_SELECTION;
-		bandeProche.Position = newPos;
-		bandeProche.ShowShadow(true);
 	}
 
 	public override void _Process(double delta)
