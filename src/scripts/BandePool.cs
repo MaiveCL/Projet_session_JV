@@ -8,8 +8,6 @@ public partial class BandePool : Node
 	[Export] public PackedScene BandeScene;
 	private Queue<BandeNode> pool = new();
 
-	// Préchauffe le pool
-	// Chaque instance est ajoutée comme enfant du pool et masquée.
 	public void Prewarm(int count)
 	{
 		for (int i = 0; i < count; i++)
@@ -36,6 +34,4 @@ public partial class BandePool : Node
 		var gauche = liste.OrderBy(b => b.GlobalPosition.X).First();
 		return gauche.GlobalPosition;
 	}
-	
-
 }

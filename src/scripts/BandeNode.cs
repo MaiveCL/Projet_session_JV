@@ -3,39 +3,29 @@ using System;
 
 public partial class BandeNode : Node2D
 {
-	/// Métadonnées
 	public int ChapitreId { get; private set; } = 0;
 	public int FrameIndex { get; private set; } = 0;
 	public int TotalHFrames { get; private set; } = 1;
 
-	/// noeuds
 	private ColorRect ombrage;
 	private Sprite2D tranche;
 	private StateMachine machine;
 
 	public override void _Ready()
 	{
-		// récupérer les nodes existants
 		ombrage = GetNode<ColorRect>("ombrage");
 		tranche = GetNode<Sprite2D>("tranche");
 		machine = tranche.GetNode<StateMachine>("StateMachine");
 	}
 
-	/// <summary>
-	/// texture: sprite sheet
-	/// totalHFrames: nombre total de frames (NbBandes)
-	/// frameIndex: index assigné à cette bande
-	/// </summary>
 	public void Configure(int chapitreId, Texture2D texture, int totalHFrames, int frameIndex, ShaderMaterial shadowMaterial, Vector2 initialPosition, int largeurBande, int hauteurBande)
 	{
 		ChapitreId = chapitreId;
 		FrameIndex = frameIndex;
 		TotalHFrames = totalHFrames;
 
-		// position initiale de la bande (local)
 		Position = initialPosition;
 
-		// configure tranche / sprite
 		if (tranche != null)
 		{
 			tranche.Texture = texture;
@@ -62,7 +52,6 @@ public partial class BandeNode : Node2D
 			machine.ChangeState("Idle");
 	}
 
-	// manipuler la bande depuis Chapitre / States
 	public void SetFrame(int newFrame)
 	{
 		FrameIndex = newFrame;

@@ -5,36 +5,47 @@ using System.Linq;
 
 public partial class Chapitre : Node2D
 {
-	// suivit de la bande la plus proche du joueur
 	private BandeNode bandeProche;
 	public BandeNode BandeProche => bandeProche;
 
 	public const float MARGE_HAUTE = 20f; // marge fixe en haut
-	public int PoolSize = 20; // remplacer par pool.bullet_pool.Count
+	public int PoolSize = 20;
 	[Export] public string TexturePath = "res://assets/sprites/chap1_total.png";
 	
 	public Texture2D BandeTexture;
 
 	public int NbPages = 22; 
-	[Export] public int NbTranches = 8;
+	[Export(PropertyHint.Range, "1,9,1")]
+	public int NbTranches { get; set; } = 8;
 	
 	public int LargeurBande;
 	public int HauteurBande;
 	
-	[Export] public int Marge = 40; // espace visuel entre bandes
+	[Export] public int Marge = 40; // entre bandes
 	[Export] public ShaderMaterial ShadowMaterial;
 
 	[Export] public PackedScene BandeScenePacked; // Scene de bande à instancier
 	
-	private BandePool pool; // notre pool de bandes
+	private BandePool pool;
+
 	private List<BandeNode> bandesPool;
-	public List<BandeNode> BandesPool => bandesPool;
+	public List<BandeNode> BandesPool
+	{
+		get => bandesPool;
+		set => bandesPool = value;
+	}
+
 	
 	private List<int> ordreBandes;
+	public List<int> OrdreBandes
+	{
+		get => ordreBandes;
+		set => ordreBandes = value; // permet d’assigner une nouvelle liste
+	}
+
 	
 	public override void _Ready()
 	{
-		// Récupérer la caméra
 		var camera = GetNode<Camera2D>("/root/Monde/Auteur/Camera2D");
 
 		// Calculer le bord gauche de l'écran
@@ -94,7 +105,7 @@ public partial class Chapitre : Node2D
 
 		PoolSize = bandesPool.Count;
 
-		// Maintenant que tout est créé, on configure les bandes
+		// Maintenant que tout est créé, on configure
 		for (int i = 0; i < PoolSize; i++)
 		{
 			var bande = bandesPool[i];
@@ -119,7 +130,6 @@ public partial class Chapitre : Node2D
 		.OrderBy(b => Mathf.Abs(b.GlobalPosition.X - joueur.GlobalPosition.X))
 		.First();
 		AppliquerEtatInitiale(bandeProche);
-		// ---------------------------------------------------
 	}
 	
 		private void AppliquerEtatInitiale(BandeNode bandeIdle = null)

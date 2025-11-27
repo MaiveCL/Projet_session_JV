@@ -1,4 +1,5 @@
 using Godot;
+using System.Linq;
 using System.Collections.Generic;
 
 public partial class MovingState : State
@@ -58,32 +59,54 @@ public partial class MovingState : State
 				// placer la bande collisionnée à la position libre
 				autre.Position = new Vector2(positionLibreX, autre.Position.Y);
 
+				// --- Mettre à jour l'ordre global OrdreBandes ---
+				EchangerOrdreGlobale(chapitre, b, autre);
+
 				// mettre à jour la position libre pour la prochaine collision
 				positionLibreX = ancienneX;
 			}
-			
+
 			// --- Lâcher de la bande ---
 			if (Input.IsActionJustReleased("down"))
 			{
 				FinaliserDepot(b, chapitre);
 				return;
 			}
-
 		}
 	}
-	
+
 	private void FinaliserDepot(BandeNode b, Chapitre chapitre)
 	{
-		// 1. Placer la bande à la position libre finale
+		// 1. Placer la bande à sa position finale (positionLibreX mémorisée)
 		b.Position = new Vector2(positionLibreX, b.Position.Y);
 
 		// 2. Réinitialiser la taille
 		b.Scale = Vector2.One;
 
-		// 3. Changer d'état
-		var machine = b.GetStateMachine();
-		if (machine != null)
-			machine.ChangeState("IdleState");
+		// 3. Ne pas toucher au pool physique ni à l'ordre global
+		// (on valide juste la position actuelle)
+
+		// 4. Changer d'état pour revenir en Idle
+		b.GetStateMachine()?.ChangeState("IdleState");
+
+		// 5. Reset du flag pour la prochaine manipulation
+		positionLibreInit = false;
 	}
 
+	// --- Fonction pour échanger l'ordre global ---
+	private void EchangerOrdreGlobale(Chapitre chapitre, BandeNode bandeA, BandeNode bandeB)
+	{
+		if (bandeA == null || bandeB == null || chapitre == null) 
+			return;
+
+		List<int> ordre = chapitre.OrdreBandes;
+
+		int indexA = ordre.IndexOf(bandeA.FrameIndex);
+		int indexB = ordre.IndexOf(bandeB.FrameIndex);
+
+		if (indexA == -1 || indexB == -1) return; // sécurité
+
+		// Échanger les valeurs dans OrdreBandes
+		(ordre[indexA], ordre[indexB]) = (ordre[indexB], ordre[indexA]);
+	}
 }

@@ -13,8 +13,5 @@ public partial class NullState : State
 
 	public override void Update(double delta)
 	{
-		// Rien.
-		// Silence.
-		// Paix.
 	}
 }
