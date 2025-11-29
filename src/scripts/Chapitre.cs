@@ -46,7 +46,7 @@ public partial class Chapitre : Node2D
 	
 	public override void _Ready()
 	{
-		var camera = GetNode<Camera2D>("/root/Monde/Auteur/Camera2D");
+		var camera = GetNode<Camera2D>("../../Auteur/Camera2D");
 
 		// Calculer le bord gauche de l'écran
 		float viewportWidth = GetViewport().GetVisibleRect().Size.X;
@@ -124,7 +124,7 @@ public partial class Chapitre : Node2D
 			);
 			bande.Visible = true;
 		}
-		var joueur = GetNode<Node2D>("/root/Monde/Auteur");
+		var joueur = GetNode<Node2D>("../../Auteur");
 		joueur.GlobalPosition = pool.GetCenterPosition();
 		bandeProche = bandesPool
 		.OrderBy(b => Mathf.Abs(b.GlobalPosition.X - joueur.GlobalPosition.X))
@@ -150,7 +150,7 @@ public partial class Chapitre : Node2D
 	
 	public void MettreAJourBandeProche()
 	{
-		var joueur = GetNode<Node2D>("/root/Monde/Auteur");
+		var joueur = GetNode<Node2D>("../../Auteur");
 		
 		BandeNode nouvelle = bandesPool
 		.OrderBy(b => Mathf.Abs(b.GlobalPosition.X - joueur.GlobalPosition.X))
@@ -211,7 +211,7 @@ public partial class Chapitre : Node2D
 	
 	private void RecycleBandes()
 	{
-		var joueur = GetNode<Node2D>("/root/Monde/Auteur");
+		var joueur = GetNode<Node2D>("../../Auteur");
 		Vector2 posJoueur = joueur.GlobalPosition;
 
 		var bandesGauche = bandesPool.Count(b => b.GlobalPosition.X < posJoueur.X);

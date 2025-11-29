@@ -1,24 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3cim0mxktjgy"]
+[gd_scene load_steps=8 format=3 uid="uid://d3cim0mxktjgy"]
 
+[ext_resource type="PackedScene" uid="uid://cegw7ckoy75fx" path="res://scenes/MenuScene.tscn" id="3_xy4bk"]
 [ext_resource type="Script" uid="uid://x5m0ql5ho2oc" path="res://scripts/MondeStates/MondeStateMachine.cs" id="5_xy4bk"]
+[ext_resource type="PackedScene" uid="uid://xe2p3sr2lwc7" path="res://scenes/GameScene.tscn" id="6_edr6m"]
 [ext_resource type="Script" uid="uid://chr3gxn1htr1n" path="res://scripts/MondeStates/MenuState.cs" id="6_s13o8"]
-[ext_resource type="Script" uid="uid://c3lmcdspcu5y6" path="res://scripts/MondeStates/InitState.cs" id="7_525qm"]
-[ext_resource type="Script" uid="uid://kktv7864igii" path="res://scripts/MondeStates/JeuState.cs" id="7_edr6m"]
+[ext_resource type="Script" uid="uid://c3lmcdspcu5y6" path="res://scripts/MondeStates/InitialState.cs" id="7_525qm"]
+[ext_resource type="Script" uid="uid://kktv7864igii" path="res://scripts/MondeStates/GameState.cs" id="7_edr6m"]
 [ext_resource type="Script" uid="uid://cyif70tw8gjt" path="res://scripts/MondeStates/ConfigState.cs" id="9_525qm"]
 
 [node name="Main" type="Node2D"]
 
-[node name="MondeStateMachine" type="Node" parent="."]
+[node name="MondeStateMachine" type="Node" parent="." node_paths=PackedStringArray("InitialState")]
 script = ExtResource("5_xy4bk")
+InitialState = NodePath("InitialState")
 
 [node name="MenuState" type="Node" parent="MondeStateMachine"]
 script = ExtResource("6_s13o8")
+MenuScene = ExtResource("3_xy4bk")
 
-[node name="InitState" type="Node" parent="MondeStateMachine"]
+[node name="InitialState" type="Node" parent="MondeStateMachine"]
 script = ExtResource("7_525qm")
 
-[node name="JeuState" type="Node" parent="MondeStateMachine"]
+[node name="GameState" type="Node" parent="MondeStateMachine"]
 script = ExtResource("7_edr6m")
+GameScene = ExtResource("6_edr6m")
 
 [node name="PauseState" type="Node" parent="MondeStateMachine"]
 
@@ -28,3 +33,5 @@ script = ExtResource("7_edr6m")
 
 [node name="ConfigState" type="Node" parent="MondeStateMachine"]
 script = ExtResource("9_525qm")
+
+[node name="SceneContainer" type="Node" parent="."]

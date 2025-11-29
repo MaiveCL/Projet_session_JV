@@ -1,14 +1,14 @@
 using Godot;
 
-public partial class MenuState : MondeState
+public partial class GameState : MondeState
 {
-	[Export] public PackedScene MenuScene;
+	[Export] public PackedScene GameScene;
 	private Node instance;
 
 	public override void Enter()
 	{
 		var container = GetTree().CurrentScene.GetNode("SceneContainer");
-		instance = MenuScene.Instantiate();
+		instance = GameScene.Instantiate();
 		container.AddChild(instance);
 	}
 
