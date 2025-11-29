@@ -8,8 +8,8 @@ public partial class MovingState : State
 	[Export] public float TargetScale = 1.25f;
 	[Export] public float GrowSpeed = 7f;
 
-	private float positionLibreX; // position libre à remplir
-	private bool positionLibreInit = false; // pour mémoriser une seule fois
+	private float positionLibreX;
+	private bool positionLibreInit = false;
 
 	public override void Enter()
 	{
@@ -17,7 +17,7 @@ public partial class MovingState : State
 		if (b != null)
 		{
 			b.ShowShadow(true);
-			// On ne mémorise pas ici, on le fera dans le premier Update
+			b.ZIndex = 1000; // très devant
 		}
 	}
 
@@ -77,19 +77,16 @@ public partial class MovingState : State
 
 	private void FinaliserDepot(BandeNode b, Chapitre chapitre)
 	{
-		// 1. Placer la bande à sa position finale (positionLibreX mémorisée)
+		// Placer la bande à sa position finale (positionLibreX mémorisée)
 		b.Position = new Vector2(positionLibreX, b.Position.Y);
 
-		// 2. Réinitialiser la taille
+		// Réinitialiser la taille
 		b.Scale = Vector2.One;
 
-		// 3. Ne pas toucher au pool physique ni à l'ordre global
-		// (on valide juste la position actuelle)
-
-		// 4. Changer d'état pour revenir en Idle
+		// Changer d'état pour revenir en Idle
 		b.GetStateMachine()?.ChangeState("IdleState");
 
-		// 5. Reset du flag pour la prochaine manipulation
+		// Reset du flag pour la prochaine manipulation
 		positionLibreInit = false;
 	}
 
@@ -109,4 +106,15 @@ public partial class MovingState : State
 		// Échanger les valeurs dans OrdreBandes
 		(ordre[indexA], ordre[indexB]) = (ordre[indexB], ordre[indexA]);
 	}
+	
+	public override void Exit()
+	{
+		var b = GetBandeNode();
+		if (b != null)
+		{
+			b.ZIndex = 0; // valeur standard (ou celle que tu veux)
+			b.Scale = Vector2.One; // au cas où on quitte Moving abruptement
+		}
+	}
+
 }
