@@ -9,13 +9,13 @@ public partial class BandeNode : Node2D
 
 	private ColorRect ombrage;
 	private Sprite2D tranche;
-	private StateMachine machine;
+	private BandesStateMachine machine;
 
 	public override void _Ready()
 	{
 		ombrage = GetNode<ColorRect>("ombrage");
 		tranche = GetNode<Sprite2D>("tranche");
-		machine = tranche.GetNode<StateMachine>("StateMachine");
+		machine = tranche.GetNode<BandesStateMachine>("BandesStateMachine");
 	}
 
 	public void Configure(int chapitreId, Texture2D texture, int totalHFrames, int frameIndex, ShaderMaterial shadowMaterial, Vector2 initialPosition, int largeurBande, int hauteurBande)
@@ -77,7 +77,7 @@ public partial class BandeNode : Node2D
 			ombrage.Visible = value;
 	}
 
-	public StateMachine GetStateMachine()
+	public BandesStateMachine GetStateMachine()
 	{
 		return machine;
 	}

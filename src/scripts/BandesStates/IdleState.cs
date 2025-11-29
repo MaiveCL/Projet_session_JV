@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class IdleState : State
+public partial class IdleState : BandeState
 {
 	private const float OFFSET_SELECTION = 40f;
 	private float originalY;

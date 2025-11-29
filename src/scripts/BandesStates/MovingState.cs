@@ -2,7 +2,7 @@ using Godot;
 using System.Linq;
 using System.Collections.Generic;
 
-public partial class MovingState : State
+public partial class MovingState : BandeState
 {
 	[Export] public float Speed = 200f;
 	[Export] public float TargetScale = 1.25f;

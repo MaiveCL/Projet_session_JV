@@ -5,4 +5,5 @@
 
 [node name="Chapitre" type="Node2D"]
 script = ExtResource("1_lhlbu")
+NbTranches = 2
 BandeScenePacked = ExtResource("2_tno2p")

@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://ciwyion7vou0k"]
+[gd_scene load_steps=6 format=3 uid="uid://ciwyion7vou0k"]
 
 [ext_resource type="Script" uid="uid://y158brae5f4u" path="res://scripts/BandeNode.cs" id="1_1htea"]
-[ext_resource type="Script" uid="uid://bgyi8w7imdqwb" path="res://scripts/States/StateMachine.cs" id="2_u0a3w"]
-[ext_resource type="Script" uid="uid://bx301gtyy7yqc" path="res://scripts/States/IdleState.cs" id="3_0u4xl"]
-[ext_resource type="Script" uid="uid://cap570xlxw2wo" path="res://scripts/States/MovingState.cs" id="4_jsr21"]
-[ext_resource type="Script" uid="uid://b335c4jydqdir" path="res://scripts/States/PooledState.cs" id="5_1sptd"]
-[ext_resource type="Script" uid="uid://c2vdtfumxa4er" path="res://scripts/States/CollectionState.cs" id="6_bbkxg"]
-[ext_resource type="Script" uid="uid://bu0vb5piii0x" path="res://scripts/States/NullState.cs" id="7_u0a3w"]
+[ext_resource type="Script" uid="uid://bgyi8w7imdqwb" path="res://scripts/BandesStates/BandesStateMachine.cs" id="2_u0a3w"]
+[ext_resource type="Script" uid="uid://bx301gtyy7yqc" path="res://scripts/BandesStates/IdleState.cs" id="3_0u4xl"]
+[ext_resource type="Script" uid="uid://cap570xlxw2wo" path="res://scripts/BandesStates/MovingState.cs" id="4_jsr21"]
+[ext_resource type="Script" uid="uid://bu0vb5piii0x" path="res://scripts/BandesStates/NullState.cs" id="7_u0a3w"]
 
 [node name="BandeNode" type="Node2D"]
 script = ExtResource("1_1htea")
@@ -18,21 +16,15 @@ metadata/_edit_use_anchors_ = true
 
 [node name="tranche" type="Sprite2D" parent="."]
 
-[node name="StateMachine" type="Node" parent="tranche" node_paths=PackedStringArray("InitialState")]
+[node name="BandesStateMachine" type="Node" parent="tranche" node_paths=PackedStringArray("InitialState")]
 script = ExtResource("2_u0a3w")
 InitialState = NodePath("NullState")
 
-[node name="IdleState" type="Node" parent="tranche/StateMachine"]
+[node name="IdleState" type="Node" parent="tranche/BandesStateMachine"]
 script = ExtResource("3_0u4xl")
 
-[node name="MovingState" type="Node" parent="tranche/StateMachine"]
+[node name="MovingState" type="Node" parent="tranche/BandesStateMachine"]
 script = ExtResource("4_jsr21")
 
-[node name="PooledState" type="Node" parent="tranche/StateMachine"]
-script = ExtResource("5_1sptd")
-
-[node name="CollectionState" type="Node" parent="tranche/StateMachine"]
-script = ExtResource("6_bbkxg")
-
-[node name="NullState" type="Node" parent="tranche/StateMachine"]
+[node name="NullState" type="Node" parent="tranche/BandesStateMachine"]
 script = ExtResource("7_u0a3w")

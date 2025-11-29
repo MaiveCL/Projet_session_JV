@@ -1,9 +1,9 @@
 using Godot;
 using System;
 
-public partial class State : Node
+public partial class BandeState : Node
 {
-	public event Action<State, string> Transitioned; // observateur
+	public event Action<BandeState, string> Transitioned; // observateur
 
 	public virtual void Enter() {}
 	public virtual void Exit() {}

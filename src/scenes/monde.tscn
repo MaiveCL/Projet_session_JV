@@ -1,9 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://d3cim0mxktjgy"]
+[gd_scene load_steps=11 format=3 uid="uid://d3cim0mxktjgy"]
 
 [ext_resource type="PackedScene" uid="uid://c8v07me1ll0r" path="res://scenes/table_jeu.tscn" id="1_2ssnh"]
 [ext_resource type="PackedScene" uid="uid://c6pgdim8ij7gc" path="res://scenes/chapitre.tscn" id="2_u5tfm"]
 [ext_resource type="Shader" uid="uid://crq03krwkd3sx" path="res://assets/shaders/shadow.gdshader" id="4_5o5ke"]
 [ext_resource type="Script" uid="uid://s4nrf038ba12" path="res://scripts/Auteur.cs" id="5_pguex"]
+[ext_resource type="Script" uid="uid://x5m0ql5ho2oc" path="res://scripts/MondeStates/MondeStateMachine.cs" id="5_xy4bk"]
+[ext_resource type="Script" uid="uid://chr3gxn1htr1n" path="res://scripts/MondeStates/MenuState.cs" id="6_s13o8"]
+[ext_resource type="Script" uid="uid://c3lmcdspcu5y6" path="res://scripts/MondeStates/InitState.cs" id="7_525qm"]
+[ext_resource type="Script" uid="uid://kktv7864igii" path="res://scripts/MondeStates/JeuState.cs" id="7_edr6m"]
+[ext_resource type="Script" uid="uid://cyif70tw8gjt" path="res://scripts/MondeStates/ConfigState.cs" id="9_525qm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pguex"]
 shader = ExtResource("4_5o5ke")
@@ -15,7 +20,7 @@ shader_parameter/shadow_color = Color(0.11764706, 0, 0, 0.627451)
 [node name="TableJeu" parent="." instance=ExtResource("1_2ssnh")]
 
 [node name="Chapitre" parent="TableJeu" instance=ExtResource("2_u5tfm")]
-NbTranches = 7
+NbTranches = 1
 ShadowMaterial = SubResource("ShaderMaterial_pguex")
 
 [node name="Auteur" type="Node2D" parent="."]
@@ -23,3 +28,24 @@ y_sort_enabled = true
 script = ExtResource("5_pguex")
 
 [node name="Camera2D" type="Camera2D" parent="Auteur"]
+
+[node name="MondeStateMachine" type="Node" parent="."]
+script = ExtResource("5_xy4bk")
+
+[node name="MenuState" type="Node" parent="MondeStateMachine"]
+script = ExtResource("6_s13o8")
+
+[node name="InitState" type="Node" parent="MondeStateMachine"]
+script = ExtResource("7_525qm")
+
+[node name="JeuState" type="Node" parent="MondeStateMachine"]
+script = ExtResource("7_edr6m")
+
+[node name="PauseState" type="Node" parent="MondeStateMachine"]
+
+[node name="GagneState" type="Node" parent="MondeStateMachine"]
+
+[node name="perdState" type="Node" parent="MondeStateMachine"]
+
+[node name="ConfigState" type="Node" parent="MondeStateMachine"]
+script = ExtResource("9_525qm")

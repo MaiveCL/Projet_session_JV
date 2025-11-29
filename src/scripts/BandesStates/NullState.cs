@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class NullState : State
+public partial class NullState : BandeState
 {
 	public override void Enter()
 	{

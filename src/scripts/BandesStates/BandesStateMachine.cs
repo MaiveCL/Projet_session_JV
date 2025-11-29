@@ -1,17 +1,17 @@
 using Godot;
 using System.Collections.Generic;
 
-public partial class StateMachine : Node
+public partial class BandesStateMachine : Node
 {
-	[Export] public State InitialState;
-	private State currentState;
-	private Dictionary<string, State> states = new();
+	[Export] public BandeState InitialState;
+	private BandeState currentState;
+	private Dictionary<string, BandeState> states = new();
 
 	public override void _Ready()
 	{
 		foreach (Node child in GetChildren())
 		{
-			if (child is State st)
+			if (child is BandeState st)
 			{
 				states[st.Name] = st;
 				st.Transitioned += OnChildTransition;
@@ -36,7 +36,7 @@ public partial class StateMachine : Node
 		currentState?.PhysicsUpdate(delta);
 	}
 
-	private void OnChildTransition(State state, string newStateName)
+	private void OnChildTransition(BandeState state, string newStateName)
 	{
 		if (state != currentState)
 			return;
