@@ -3,6 +3,25 @@ using System;
 
 public partial class BandeNode : Node2D
 {
+	public Chapitre Chapitre => GetChapitre();
+	public Chapitre GetChapitre()
+	{
+		Node current = this;
+		while (current != null && !(current is Chapitre))
+			current = current.GetParent<Node>();
+		return current as Chapitre;
+	}
+	
+	public Node2D Joueur => GetJoueur();
+
+	public Node2D GetJoueur()
+	{
+		Node current = this;
+		while (current != null && !(current is Node2D && current.Name == "Auteur"))
+			current = current.GetParent<Node>();
+		return current as Node2D;
+	}
+
 	public int ChapitreId { get; private set; } = 0;
 	public int FrameIndex { get; private set; } = 0;
 	public int TotalHFrames { get; private set; } = 1;

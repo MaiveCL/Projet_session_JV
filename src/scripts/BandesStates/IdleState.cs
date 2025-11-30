@@ -23,10 +23,11 @@ public partial class IdleState : BandeState
 
 	public override void Update(double delta)
 	{
-		var chapitre = GetNode<Chapitre>("/root/Monde/TableJeu/Chapitre");
+		var chapitre = GetBandeNode()?.Chapitre;
 		if (chapitre == null) return;
 
-		var joueur = chapitre.GetNode<Auteur>("/root/Monde/Auteur");
+		//var joueur = chapitre.GetNode<Auteur>("/root/Monde/Auteur"); Fonctionne en local, pas en global
+		var joueur = GetBandeNode().Chapitre.GetParent<Node2D>().GetParent<Node2D>().GetNode<Node2D>("Auteur");
 		if (joueur == null) return;
 
 		// Mettre à jour la bande la plus proche

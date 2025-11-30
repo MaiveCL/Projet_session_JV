@@ -26,9 +26,11 @@ public partial class MovingState : BandeState
 		var b = GetBandeNode();
 		if (b == null) return;
 
-		var chapitre = GetNode<Chapitre>("/root/Monde/TableJeu/Chapitre");
-		var joueur = chapitre?.GetNode<Node2D>("/root/Monde/Auteur");
-		if (chapitre == null || joueur == null) return;
+		var chapitre = b.Chapitre;
+		if (chapitre == null) return;
+
+		var joueur = b.Joueur; // <-- Utiliser la propriété Joueur de la bande
+		if (joueur == null) return;
 
 		// --- Mémoriser la position initiale de la bande une seule fois ---
 		if (!positionLibreInit)
