@@ -46,6 +46,8 @@ public partial class Chapitre : Node2D
 	
 	public override void _Ready()
 	{
+		DebugTool.LogOnce("LOCAL PATH = " + GetPath());
+
 		var camera = GetNode<Camera2D>("../../Auteur/Camera2D");
 
 		// Calculer le bord gauche de l'écran
