@@ -5,8 +5,19 @@ using System.Linq;
 
 public partial class Chapitre : Node2D
 {
+	// %%% Ajout de l'événement pour notifier la victoire
+	public event Action VictoireDetectee;
+	
 	private BandeNode bandeProche;
 	public BandeNode BandeProche => bandeProche;
+	
+	private MondeState machine;
+
+	public void InitMachine(MondeState m)
+	{
+		machine = m;
+		GD.Print("Machine initialisée dans Chapitre !");
+	}
 
 	public const float MARGE_HAUTE = 20f; // marge fixe en haut
 	public int PoolSize = 20;
@@ -34,7 +45,6 @@ public partial class Chapitre : Node2D
 		get => bandesPool;
 		set => bandesPool = value;
 	}
-
 	
 	private List<int> ordreBandes;
 	public List<int> OrdreBandes
@@ -42,7 +52,6 @@ public partial class Chapitre : Node2D
 		get => ordreBandes;
 		set => ordreBandes = value; // permet d’assigner une nouvelle liste
 	}
-
 	
 	public override void _Ready()
 	{
@@ -163,6 +172,9 @@ public partial class Chapitre : Node2D
 
 		// Affecter la nouvelle
 		bandeProche = nouvelle;
+		
+		// Déclencher le rééquilibrage du pool seulement si la bande proche a changé
+		RecycleBandes();
 	}
 
 	public override void _Process(double delta)
@@ -172,7 +184,10 @@ public partial class Chapitre : Node2D
 			ShuffleOrdre(ordreBandes);
 			ReassignerPool(bandesPool, ordreBandes);
 		}
-		RecycleBandes();
+		if (Input.IsActionJustPressed("triche"))
+		{
+			ActiverTriche();
+		}
 	}
 
 	private void ShuffleOrdre(List<int> ordre)
@@ -252,5 +267,65 @@ public partial class Chapitre : Node2D
 			int newIndex = (ordreBandes.IndexOf(gauche.FrameIndex) + bandesPool.Count) % ordreBandes.Count;
 			gauche.SetFrame(ordreBandes[newIndex]);
 		}
+		
+		PrintOrdre();
+		CheckVictoire();
+		// Après tout changement de position, on vérifie la victoire
 	}
+	
+	private void CheckVictoire()
+	{
+		if (ordreBandes == null || ordreBandes.Count == 0)
+			return;
+
+		int total = ordreBandes.Count;
+		
+		// La séquence peut commencer n'importe où
+		int start = ordreBandes[0];
+	
+		for (int i = 0; i < total; i++)
+		{
+			int expected = (start + i) % total;
+
+			if (ordreBandes[i] != expected)
+			{
+				GD.Print("L'ordre n'est pas encore correct...");
+				return;
+			}
+		}
+		GD.Print("Victoire détectée !");
+		VictoireDetectee?.Invoke();
+	}
+	
+	private void PrintOrdre()
+	{
+		GD.Print("ORDRE LOGIQUE COMPLET : ", string.Join(", ", ordreBandes));
+	}
+	
+	public void ActiverTriche()
+	{
+		int total = ordreBandes.Count;
+
+		// Remettre les indices dans l’ordre croissant
+		for (int i = 0; i < total; i++)
+		{
+			ordreBandes[i] = i;
+		}
+
+		// Réassigner les frames et positions pour que l'affichage corresponde
+		for (int i = 0; i < bandesPool.Count; i++)
+		{
+			bandesPool[i].SetFrame(ordreBandes[i]);
+			bandesPool[i].GlobalPosition = new Vector2(i * (LargeurBande + Marge), MARGE_HAUTE);
+		}
+
+		// Mettre à jour la bande la plus proche
+		var joueur = GetNode<Node2D>("../../Auteur");
+		bandeProche = bandesPool
+			.OrderBy(b => Mathf.Abs(b.GlobalPosition.X - joueur.GlobalPosition.X))
+			.First();
+
+		GD.Print("Triche activée : ordreBandes réinitialisé et bandes positionnées !");
+	}
+
 }

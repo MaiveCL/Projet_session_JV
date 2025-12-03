@@ -53,6 +53,7 @@ public partial class MondeStateMachine : Node
 	{
 		if (states.TryGetValue(stateName, out var newState))
 		{
+			GD.Print($"[StateMachine] Changing state from {currentState?.Name ?? "null"} to {newState.Name}");
 			currentState?.Exit();
 			currentState = newState;
 			currentState.Enter();
