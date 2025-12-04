@@ -55,6 +55,9 @@ public partial class Chapitre : Node2D
 	
 	public override void _Ready()
 	{
+		// --- récupérer l'overlay sans caster Monde ---
+		var overlay = GetNode<Lecteurs>("/root/Main/SceneContainer/Monde/GameInfos/Lecteurs");
+
 		DebugTool.LogOnce("LOCAL PATH = " + GetPath());
 
 		var camera = GetNode<Camera2D>("../../Auteur/Camera2D");

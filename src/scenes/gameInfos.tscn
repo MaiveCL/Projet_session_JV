@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dd7n4ub72qclf"]
+
+[ext_resource type="Script" uid="uid://46dp3foqh6wt" path="res://scripts/Lecteurs.cs" id="1_pedwd"]
+
+[node name="GameInfos" type="CanvasLayer"]
+
+[node name="Lecteurs" type="ProgressBar" parent="."]
+offset_right = 400.0
+offset_bottom = 40.0
+scale = Vector2(4, 4)
+max_value = 10000.0
+value = 10000.0
+script = ExtResource("1_pedwd")
