@@ -9,7 +9,7 @@ public partial class Lecteurs : ProgressBar
 
 	public override void _Ready()
 	{
-		chapitreNode = GetNode<Chapitre>("/root/Main/SceneContainer/Monde/TableauJeu/Chapitre");
+		chapitreNode = GetNode<Chapitre>("/root/Main/SceneContainer/Monde/TableJeu/Chapitre");
 		AjusterTaille();
 	}
 

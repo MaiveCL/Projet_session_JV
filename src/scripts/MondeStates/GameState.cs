@@ -12,12 +12,10 @@ public partial class GameState : MondeState
 		instance = GameScene.Instantiate();
 		container.AddChild(instance);
 		
-		// On récupère le Chapitre dans la scène instanciée
 		var chapitre = GetTree().CurrentScene.GetNode<Chapitre>("SceneContainer/Monde/TableJeu/Chapitre");
 		if (chapitre != null)
 		{
 			 chapitre.VictoireDetectee += () => EmitTransition("MenuState"); // %%%
-			//chapitre.InitMachine(this); // si GameState hérite de MondeState, ça marche
 		}
 		else
 		{
