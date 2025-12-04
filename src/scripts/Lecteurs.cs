@@ -3,6 +3,8 @@ using System;
 
 public partial class Lecteurs : ProgressBar
 {
+	private Label valeurTexte;
+
 	[Export] public float Marge = 40f; // marge au-dessus
 
 	private Chapitre chapitreNode;
@@ -11,6 +13,7 @@ public partial class Lecteurs : ProgressBar
 	{
 		chapitreNode = GetNode<Chapitre>("/root/Main/SceneContainer/Monde/TableJeu/Chapitre");
 		AjusterTaille();
+		valeurTexte = GetNode<Label>("ValeurTexte");
 	}
 
 	public override void _Process(double delta)
@@ -21,6 +24,7 @@ public partial class Lecteurs : ProgressBar
 	public void SetValeur(float ratio)
 	{
 		Value = ratio * MaxValue;
+		MettreAJourTexte();
 	}
 
 	private void AjusterTaille()
@@ -37,4 +41,16 @@ public partial class Lecteurs : ProgressBar
 		// On utilise CustomMinimumSize pour définir la taille
 		CustomMinimumSize = new Vector2(largeur, hauteur);
 	}
+	
+	private void MettreAJourTexte()
+	{
+		if (valeurTexte != null)
+		{
+			int actuel = Mathf.RoundToInt(Value);
+			int total = Mathf.RoundToInt(MaxValue);
+			string sep = "\u2009"; // espace fine
+			valeurTexte.Text = $"    Lecteurs{sep}: {actuel:n0}".Replace(",", sep) + " / " + $"{total:n0}".Replace(",", sep);
+		}
+	}
+
 }

@@ -291,12 +291,8 @@ public partial class Chapitre : Node2D
 			int expected = (start + i) % total;
 
 			if (ordreBandes[i] != expected)
-			{
-				GD.Print("L'ordre n'est pas encore correct...");
 				return;
-			}
 		}
-		GD.Print("Victoire détectée !");
 		VictoireDetectee?.Invoke();
 	}
 	
@@ -307,27 +303,9 @@ public partial class Chapitre : Node2D
 	
 	public void ActiverTriche()
 	{
-		int total = ordreBandes.Count;
-
-		// Remettre les indices dans l’ordre croissant
-		for (int i = 0; i < total; i++)
-		{
+		for (int i = 0; i < ordreBandes.Count; i++)
 			ordreBandes[i] = i;
-		}
 
-		// Réassigner les frames et positions pour que l'affichage corresponde
-		for (int i = 0; i < bandesPool.Count; i++)
-		{
-			bandesPool[i].SetFrame(ordreBandes[i]);
-			bandesPool[i].GlobalPosition = new Vector2(i * (LargeurBande + Marge), MARGE_HAUTE);
-		}
-
-		// Mettre à jour la bande la plus proche
-		var joueur = GetNode<Node2D>("../../Auteur");
-		bandeProche = bandesPool
-			.OrderBy(b => Mathf.Abs(b.GlobalPosition.X - joueur.GlobalPosition.X))
-			.First();
-
-		GD.Print("Triche activée : ordreBandes réinitialisé et bandes positionnées !");
+		GD.Print("Triche activé : ordreBandes remis à zéro, nodes inchangés.");
 	}
 }

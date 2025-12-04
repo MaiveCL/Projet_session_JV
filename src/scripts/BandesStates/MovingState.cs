@@ -91,7 +91,7 @@ public partial class MovingState : BandeState
 		if (sonAction != null && settings != null && settings.ActionEnabled)
 			sonAction.Play();
 	}
-
+	
 	private void EchangerOrdreGlobale(Chapitre chapitre, BandeNode bandeDeplacee, BandeNode bandeCollision)
 	{
 		if (bandeDeplacee == null || bandeCollision == null || chapitre == null)
@@ -104,23 +104,65 @@ public partial class MovingState : BandeState
 		int indexDeplacee = ordre.IndexOf(bandeDeplacee.FrameIndex);
 		int indexCollision = ordre.IndexOf(bandeCollision.FrameIndex);
 
-		if (indexDeplacee == -1 || indexCollision == -1) return;
+		if (indexDeplacee == -1 || indexCollision == -1)
+			return;
 
+		// Fonction pour vérifier si une bande a un voisin correct
+		bool AVoisinCorrect(int index)
+		{
+			if (index < 0 || index >= ordre.Count) return false;
+			bool correct = false;
+			if (index > 0 && ordre[index] == ordre[index - 1] + 1) correct = true;
+			if (index < ordre.Count - 1 && ordre[index] == ordre[index + 1] - 1) correct = true;
+			return correct;
+		}
+
+		bool avant = AVoisinCorrect(indexDeplacee);
+
+		// Échange les positions dans l'ordre
 		(ordre[indexDeplacee], ordre[indexCollision]) = (ordre[indexCollision], ordre[indexDeplacee]);
 
-		// --- Détection du “voisin correct” pour la bande déplacée ---
-		int total = ordre.Count;
-		bool voisinCorrect = false;
+		bool apres = AVoisinCorrect(indexCollision); // on vérifie la nouvelle position de la bande déplacée
 
-		if (indexDeplacee > 0 && ordre[indexDeplacee] == ordre[indexDeplacee - 1] + 1)
-			voisinCorrect = true;
-		if (indexDeplacee < total - 1 && ordre[indexDeplacee] == ordre[indexDeplacee + 1] - 1)
-			voisinCorrect = true;
-
-				// Jouer sonFacile si EasyMode activé
-		if (voisinCorrect && settings != null && settings.EasyModeEnabled && sonFacile != null)
+		// Jouer le son seulement si elle gagne un voisin correct
+		if (!avant && apres && settings != null && settings.EasyModeEnabled && sonFacile != null)
 			sonFacile.Play();
 	}
+
+
+	//private void EchangerOrdreGlobale(Chapitre chapitre, BandeNode bandeDeplacee, BandeNode bandeCollision)
+	//{
+		//if (bandeDeplacee == null || bandeCollision == null || chapitre == null)
+			//return;
+//
+		//chapitre.RecycleBandes();
+//
+		//List<int> ordre = chapitre.OrdreBandes;
+//
+		//// Mémoriser l'index de la bande déplacée avant l'échange
+		//int indexDeplaceeAvant = ordre.IndexOf(bandeDeplacee.FrameIndex);
+		//int indexCollision = ordre.IndexOf(bandeCollision.FrameIndex);
+//
+		//if (indexDeplaceeAvant == -1 || indexCollision == -1) 
+			//return; // sécurité, au cas où la bande n'est pas trouvée
+//
+		//// Échanger les positions dans la liste
+		//(ordre[indexDeplaceeAvant], ordre[indexCollision]) = (ordre[indexCollision], ordre[indexDeplaceeAvant]);
+//
+		//int total = ordre.Count;
+//
+		//// Vérifier si la bande déplacée a maintenant un voisin correct
+		//bool voisinCorrect = false;
+		//if (indexDeplaceeAvant > 0 && ordre[indexDeplaceeAvant] == ordre[indexDeplaceeAvant - 1] + 1)
+			//voisinCorrect = true;
+		//if (indexDeplaceeAvant < total - 1 && ordre[indexDeplaceeAvant] == ordre[indexDeplaceeAvant + 1] - 1)
+			//voisinCorrect = true;
+//
+		//// Jouer le son seulement si la bande déplacée a un voisin correct
+		//if (voisinCorrect && settings != null && settings.EasyModeEnabled && sonFacile != null)
+			//sonFacile.Play();
+	//}
+
 
 	public override void Exit()
 	{
