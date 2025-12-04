@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3cim0mxktjgy"]
+[gd_scene load_steps=11 format=3 uid="uid://d3cim0mxktjgy"]
 
 [ext_resource type="PackedScene" uid="uid://cegw7ckoy75fx" path="res://scenes/MenuScene.tscn" id="3_xy4bk"]
 [ext_resource type="Script" uid="uid://x5m0ql5ho2oc" path="res://scripts/MondeStates/MondeStateMachine.cs" id="5_xy4bk"]
@@ -7,7 +7,9 @@
 [ext_resource type="Script" uid="uid://c3lmcdspcu5y6" path="res://scripts/MondeStates/InitialState.cs" id="7_525qm"]
 [ext_resource type="Script" uid="uid://kktv7864igii" path="res://scripts/MondeStates/GameState.cs" id="7_edr6m"]
 [ext_resource type="AudioStream" uid="uid://kjoc5844jjip" path="res://assets/audio/Epic-Inspiring-Cinematic-Journey_AdobeStock.ogg" id="8_edr6m"]
+[ext_resource type="AudioStream" uid="uid://c2i4k0m5cs3eg" path="res://assets/audio/DETECT_pickupCoin.wav" id="9_4ppgb"]
 [ext_resource type="Script" uid="uid://cyif70tw8gjt" path="res://scripts/MondeStates/ConfigState.cs" id="9_525qm"]
+[ext_resource type="AudioStream" uid="uid://crp8fm5qxxi2c" path="res://assets/audio/SELECT_synth.wav" id="10_4ppgb"]
 
 [node name="Main" type="Node2D"]
 
@@ -41,3 +43,11 @@ script = ExtResource("9_525qm")
 stream = ExtResource("8_edr6m")
 autoplay = true
 bus = &"Musique"
+
+[node name="DetectPickupCoin" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_4ppgb")
+bus = &"easy_mode"
+
+[node name="SelectSynth" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_4ppgb")
+bus = &"SFX"
