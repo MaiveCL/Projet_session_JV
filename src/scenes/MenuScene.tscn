@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b14uy2qxqhuly" path="res://scripts/MenuScene.cs" id="1_6fxy3"]
 [ext_resource type="PackedScene" uid="uid://c8v07me1ll0r" path="res://scenes/table_jeu.tscn" id="2_21ehr"]
 
-[node name="MenuScene" type="Control" node_paths=PackedStringArray("Menu", "SousMenu", "startButton", "aide", "dialog", "quitButton", "optionsButton", "optionsPanel", "musicToggle", "ActionToggle", "easyModeToggle")]
+[node name="MenuScene" type="Control" node_paths=PackedStringArray("Menu", "SousMenu", "startButton", "aide", "dialog", "quitButton", "optionsButton", "optionsPanel", "musicToggle", "ActionToggle", "easyModeToggle", "BackButton")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_6fxy3")
@@ -18,6 +18,7 @@ optionsPanel = NodePath("SousMenu")
 musicToggle = NodePath("SousMenu/musicToggle")
 ActionToggle = NodePath("SousMenu/ActionToggle")
 easyModeToggle = NodePath("SousMenu/easyModeToggle")
+BackButton = NodePath("SousMenu/BackButton")
 
 [node name="TableJeu" parent="." instance=ExtResource("2_21ehr")]
 
@@ -100,10 +101,10 @@ CONTRÔLES :
 dialog_autowrap = true
 
 [node name="SousMenu" type="VBoxContainer" parent="."]
-visible = false
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -554.0
+offset_right = 555.0
+offset_bottom = 167.0
 alignment = 1
 
 [node name="musicToggle" type="CheckButton" parent="SousMenu"]
@@ -120,3 +121,8 @@ text = "Sons sur les actions"
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Mode facile (signal sonore sous détection d'une tranche consécutive)"
+
+[node name="BackButton" type="Button" parent="SousMenu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Retour au Menu"

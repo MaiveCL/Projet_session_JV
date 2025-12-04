@@ -18,6 +18,7 @@ public partial class MenuScene : Control
 	[Export] private CheckButton musicToggle;
 	[Export] private CheckButton ActionToggle;
 	[Export] private CheckButton easyModeToggle;
+	[Export] private Button BackButton;
 
 	public override void _Ready()
 	{
@@ -39,8 +40,12 @@ public partial class MenuScene : Control
 			ActionToggle.Toggled += _OnActionToggleToggled;
 		if (easyModeToggle != null)
 			easyModeToggle.Toggled += _OnEasyModeToggleToggled;
+		if (BackButton != null)
+			BackButton.Pressed += OnBackPressed;
+
 
 		SetupParallaxForMenu();
+		InitialiserOptionsParDefaut();
 	}
 
 	private void OnStartPressed()
@@ -67,6 +72,9 @@ public partial class MenuScene : Control
 
 		SousMenu.Visible = ouvrir;
 		Menu.Visible = !ouvrir;
+
+		if (ouvrir)
+			SynchroniserOptionsAvecLeJeu();
 	}
 
 	private void _OnMusicToggleToggled(bool pressed)
@@ -103,4 +111,43 @@ public partial class MenuScene : Control
 			tableJeu.ScrollSpeed = new Vector2(-10, 0);
 		}
 	}
+	
+	private void SynchroniserOptionsAvecLeJeu()
+	{
+		var musique = GetNode<AudioStreamPlayer>("/root/Main/Musique");
+		var action = GetNode<AudioStreamPlayer>("/root/Main/Action");
+		var facile  = GetNode<AudioStreamPlayer>("/root/Main/Facile");
+
+		if (musique != null && musicToggle != null)
+			musicToggle.ButtonPressed = musique.Playing;
+
+		if (action != null && ActionToggle != null)
+			ActionToggle.ButtonPressed = action.Playing;
+
+		if (facile != null && easyModeToggle != null)
+			easyModeToggle.ButtonPressed = facile.Playing;
+	}
+	
+	private void OnBackPressed()
+	{
+		SousMenu.Visible = false;
+		Menu.Visible = true;
+	}
+	
+	private void InitialiserOptionsParDefaut()
+	{
+		var musique = GetNode<AudioStreamPlayer>("/root/Main/Musique");
+		var action  = GetNode<AudioStreamPlayer>("/root/Main/Action");
+		var facile  = GetNode<AudioStreamPlayer>("/root/Main/Facile");
+
+		if (musique != null && !musique.Playing)
+			musique.Play();
+
+		if (action != null && !action.Playing)
+			action.Play();
+
+		if (facile != null && facile.Playing)
+			facile.Stop();       // Easy toujours désactivé
+	}
+
 }
