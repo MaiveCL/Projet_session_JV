@@ -1,5 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3cim0mxktjgy"]
+[gd_scene load_steps=12 format=3 uid="uid://d3cim0mxktjgy"]
 
+[ext_resource type="Script" uid="uid://b1gs1mhbt5bb5" path="res://scripts/Settings.cs" id="1_c3moh"]
 [ext_resource type="PackedScene" uid="uid://cegw7ckoy75fx" path="res://scenes/MenuScene.tscn" id="3_xy4bk"]
 [ext_resource type="Script" uid="uid://x5m0ql5ho2oc" path="res://scripts/MondeStates/MondeStateMachine.cs" id="5_xy4bk"]
 [ext_resource type="PackedScene" uid="uid://xe2p3sr2lwc7" path="res://scenes/GameScene.tscn" id="6_edr6m"]
@@ -12,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://crp8fm5qxxi2c" path="res://assets/audio/SELECT_synth.wav" id="10_4ppgb"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_c3moh")
 
 [node name="MondeStateMachine" type="Node" parent="." node_paths=PackedStringArray("InitialState")]
 script = ExtResource("5_xy4bk")
@@ -41,6 +43,7 @@ script = ExtResource("9_525qm")
 
 [node name="Musique" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_edr6m")
+volume_db = -0.929
 autoplay = true
 bus = &"Musique"
 

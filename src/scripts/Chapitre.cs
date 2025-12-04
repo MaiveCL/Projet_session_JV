@@ -173,7 +173,7 @@ public partial class Chapitre : Node2D
 		// Affecter la nouvelle
 		bandeProche = nouvelle;
 		
-		// Déclencher le rééquilibrage du pool seulement si la bande proche a changé
+		// %%% Déclencher le rééquilibrage du pool seulement si la bande proche a changé
 		RecycleBandes();
 	}
 
@@ -226,7 +226,7 @@ public partial class Chapitre : Node2D
 		}
 	}
 	
-	private void RecycleBandes()
+	public void RecycleBandes()
 	{
 		var joueur = GetNode<Node2D>("../../Auteur");
 		Vector2 posJoueur = joueur.GlobalPosition;
@@ -327,5 +327,4 @@ public partial class Chapitre : Node2D
 
 		GD.Print("Triche activée : ordreBandes réinitialisé et bandes positionnées !");
 	}
-
 }

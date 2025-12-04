@@ -19,9 +19,14 @@ public partial class MenuScene : Control
 	[Export] private CheckButton ActionToggle;
 	[Export] private CheckButton easyModeToggle;
 	[Export] private Button BackButton;
+	
+	private Settings settings;
 
 	public override void _Ready()
 	{
+		var main = GetNode<Node>("/root/Main");
+		settings = main as Settings;
+		
 		startButton.Pressed += OnStartPressed;
 		aide.Pressed += OnCommentJouerPressed;
 		quitButton.Pressed += OnQuitPressed;
@@ -43,9 +48,7 @@ public partial class MenuScene : Control
 		if (BackButton != null)
 			BackButton.Pressed += OnBackPressed;
 
-
 		SetupParallaxForMenu();
-		InitialiserOptionsParDefaut();
 	}
 
 	private void OnStartPressed()
@@ -82,6 +85,9 @@ public partial class MenuScene : Control
 		var musique = GetNode<AudioStreamPlayer>("/root/Main/Musique");
 		if (musique != null)
 			musique.Playing = pressed;
+
+		if (settings != null)
+			settings.MusicEnabled = pressed;
 	}
 
 	private void _OnActionToggleToggled(bool pressed)
@@ -89,6 +95,9 @@ public partial class MenuScene : Control
 		var sfx = GetNode<AudioStreamPlayer>("/root/Main/Action");
 		if (sfx != null)
 			sfx.Playing = pressed;
+
+		if (settings != null)
+			settings.ActionEnabled = pressed;
 	}
 
 	private void _OnEasyModeToggleToggled(bool pressed)
@@ -97,10 +106,8 @@ public partial class MenuScene : Control
 		if (easy != null)
 			easy.Playing = pressed;
 
-		// Stocker l'état dans Main pour que le jeu sache si EasyMode est activé
-		var main = GetNode<Node>("/root/Main");
-		if (main != null)
-			main.Set("EasyModeEnabled", pressed);
+		if (settings != null)
+			settings.EasyModeEnabled = pressed;
 	}
 
 	private void SetupParallaxForMenu()
@@ -114,40 +121,32 @@ public partial class MenuScene : Control
 	
 	private void SynchroniserOptionsAvecLeJeu()
 	{
+		if (settings == null) return;
+
+		if (musicToggle != null)
+			musicToggle.ButtonPressed = settings.MusicEnabled;
+
+		if (ActionToggle != null)
+			ActionToggle.ButtonPressed = settings.ActionEnabled;
+
+		if (easyModeToggle != null)
+			easyModeToggle.ButtonPressed = settings.EasyModeEnabled;
+
+		// Audio
 		var musique = GetNode<AudioStreamPlayer>("/root/Main/Musique");
+		if (musique != null) musique.Playing = settings.MusicEnabled;
+
 		var action = GetNode<AudioStreamPlayer>("/root/Main/Action");
-		var facile  = GetNode<AudioStreamPlayer>("/root/Main/Facile");
+		if (action != null) action.Playing = settings.ActionEnabled;
 
-		if (musique != null && musicToggle != null)
-			musicToggle.ButtonPressed = musique.Playing;
-
-		if (action != null && ActionToggle != null)
-			ActionToggle.ButtonPressed = action.Playing;
-
-		if (facile != null && easyModeToggle != null)
-			easyModeToggle.ButtonPressed = facile.Playing;
+		var facile = GetNode<AudioStreamPlayer>("/root/Main/Facile");
+		if (facile != null) facile.Playing = settings.EasyModeEnabled;
 	}
 	
 	private void OnBackPressed()
 	{
 		SousMenu.Visible = false;
 		Menu.Visible = true;
-	}
-	
-	private void InitialiserOptionsParDefaut()
-	{
-		var musique = GetNode<AudioStreamPlayer>("/root/Main/Musique");
-		var action  = GetNode<AudioStreamPlayer>("/root/Main/Action");
-		var facile  = GetNode<AudioStreamPlayer>("/root/Main/Facile");
-
-		if (musique != null && !musique.Playing)
-			musique.Play();
-
-		if (action != null && !action.Playing)
-			action.Play();
-
-		if (facile != null && facile.Playing)
-			facile.Stop();       // Easy toujours désactivé
 	}
 
 }
