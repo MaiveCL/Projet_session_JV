@@ -118,7 +118,6 @@ public partial class MovingState : BandeState
 		}
 
 		bool avant = AVoisinCorrect(indexDeplacee);
-
 		// Échange les positions dans l'ordre
 		(ordre[indexDeplacee], ordre[indexCollision]) = (ordre[indexCollision], ordre[indexDeplacee]);
 
@@ -128,41 +127,6 @@ public partial class MovingState : BandeState
 		if (!avant && apres && settings != null && settings.EasyModeEnabled && sonFacile != null)
 			sonFacile.Play();
 	}
-
-
-	//private void EchangerOrdreGlobale(Chapitre chapitre, BandeNode bandeDeplacee, BandeNode bandeCollision)
-	//{
-		//if (bandeDeplacee == null || bandeCollision == null || chapitre == null)
-			//return;
-//
-		//chapitre.RecycleBandes();
-//
-		//List<int> ordre = chapitre.OrdreBandes;
-//
-		//// Mémoriser l'index de la bande déplacée avant l'échange
-		//int indexDeplaceeAvant = ordre.IndexOf(bandeDeplacee.FrameIndex);
-		//int indexCollision = ordre.IndexOf(bandeCollision.FrameIndex);
-//
-		//if (indexDeplaceeAvant == -1 || indexCollision == -1) 
-			//return; // sécurité, au cas où la bande n'est pas trouvée
-//
-		//// Échanger les positions dans la liste
-		//(ordre[indexDeplaceeAvant], ordre[indexCollision]) = (ordre[indexCollision], ordre[indexDeplaceeAvant]);
-//
-		//int total = ordre.Count;
-//
-		//// Vérifier si la bande déplacée a maintenant un voisin correct
-		//bool voisinCorrect = false;
-		//if (indexDeplaceeAvant > 0 && ordre[indexDeplaceeAvant] == ordre[indexDeplaceeAvant - 1] + 1)
-			//voisinCorrect = true;
-		//if (indexDeplaceeAvant < total - 1 && ordre[indexDeplaceeAvant] == ordre[indexDeplaceeAvant + 1] - 1)
-			//voisinCorrect = true;
-//
-		//// Jouer le son seulement si la bande déplacée a un voisin correct
-		//if (voisinCorrect && settings != null && settings.EasyModeEnabled && sonFacile != null)
-			//sonFacile.Play();
-	//}
-
 
 	public override void Exit()
 	{

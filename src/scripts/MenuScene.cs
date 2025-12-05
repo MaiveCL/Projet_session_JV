@@ -21,12 +21,23 @@ public partial class MenuScene : Control
 	[Export] private Button BackButton;
 	
 	private Settings settings;
+	private MondeStateMachine stateMachine;
+	private AudioStreamPlayer musique;
+	private AudioStreamPlayer action;
+	private AudioStreamPlayer facile;
+	
+	public void Inject(Settings s, MondeStateMachine sm,
+		AudioStreamPlayer m, AudioStreamPlayer a, AudioStreamPlayer f)
+	{
+		settings = s;
+		stateMachine = sm;
+		musique = m;
+		action = a;
+		facile = f;
+	}
 
 	public override void _Ready()
 	{
-		var main = GetNode<Node>("/root/Main");
-		settings = main as Settings;
-		
 		startButton.Pressed += OnStartPressed;
 		aide.Pressed += OnCommentJouerPressed;
 		quitButton.Pressed += OnQuitPressed;
@@ -53,13 +64,11 @@ public partial class MenuScene : Control
 
 	private void OnStartPressed()
 	{
-		GetNode<MondeStateMachine>("/root/Main/MondeStateMachine")
-			.ChangeState("GameState");
+		stateMachine.ChangeState("GameState");
 	}
 
 	private void OnCommentJouerPressed()
 	{
-		// Affiche le popup
 		dialog.Popup();
 	}
 
@@ -68,7 +77,6 @@ public partial class MenuScene : Control
 		GetTree().Quit();
 	}
 
-	// Gestion du sous-menu Options
 	private void OnOptionsPressed()
 	{
 		bool ouvrir = !SousMenu.Visible;
@@ -82,7 +90,6 @@ public partial class MenuScene : Control
 
 	private void _OnMusicToggleToggled(bool pressed)
 	{
-		var musique = GetNode<AudioStreamPlayer>("/root/Main/Musique");
 		if (musique != null)
 			musique.Playing = pressed;
 
@@ -92,9 +99,8 @@ public partial class MenuScene : Control
 
 	private void _OnActionToggleToggled(bool pressed)
 	{
-		var sfx = GetNode<AudioStreamPlayer>("/root/Main/Action");
-		if (sfx != null)
-			sfx.Playing = pressed;
+		if (action != null)
+			action.Playing = pressed;
 
 		if (settings != null)
 			settings.ActionEnabled = pressed;
@@ -102,9 +108,8 @@ public partial class MenuScene : Control
 
 	private void _OnEasyModeToggleToggled(bool pressed)
 	{
-		var easy = GetNode<AudioStreamPlayer>("/root/Main/Facile");
-		if (easy != null)
-			easy.Playing = pressed;
+		if (facile != null)
+			facile.Playing = pressed;
 
 		if (settings != null)
 			settings.EasyModeEnabled = pressed;
@@ -132,14 +137,8 @@ public partial class MenuScene : Control
 		if (easyModeToggle != null)
 			easyModeToggle.ButtonPressed = settings.EasyModeEnabled;
 
-		// Audio
-		var musique = GetNode<AudioStreamPlayer>("/root/Main/Musique");
 		if (musique != null) musique.Playing = settings.MusicEnabled;
-
-		var action = GetNode<AudioStreamPlayer>("/root/Main/Action");
 		if (action != null) action.Playing = settings.ActionEnabled;
-
-		var facile = GetNode<AudioStreamPlayer>("/root/Main/Facile");
 		if (facile != null) facile.Playing = settings.EasyModeEnabled;
 	}
 	
