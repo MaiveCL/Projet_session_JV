@@ -30,4 +30,3 @@ script = ExtResource("4_6pl24")
 
 [node name="GameScene" type="Node" parent="."]
 script = ExtResource("1_7s5hy")
-PerteParSeconde = 22.0

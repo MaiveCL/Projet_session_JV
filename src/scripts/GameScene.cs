@@ -9,6 +9,7 @@ public partial class GameScene : Node
 	private float fans;
 	private Lecteurs overlay;
 	private Label debugLabel;
+	private CenterContainer centerContainer;
 	
 	public event Action GameOverDetecte;
 
@@ -22,12 +23,20 @@ public partial class GameScene : Node
 		overlay = GetNode<Lecteurs>("../GameInfos/Lecteurs");
 		debugLabel = GetNode<Label>("../GameInfos/DebugLabel");
 		debugLabel.Visible = false;
+		
+		centerContainer = GetNode<CenterContainer>("../GameInfos/centerContainer");
+		centerContainer.Visible = false;
+
+		
 		MAJUI();
 	}
 
 	public override void _Process(double delta)
 	{
 		var settings = GetNode<Settings>("/root/Main");
+		
+		centerContainer.Visible = settings.IsPaused;
+		
 		if (settings.IsPaused)
 			return;
 

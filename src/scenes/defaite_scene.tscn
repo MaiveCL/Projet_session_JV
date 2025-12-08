@@ -7,8 +7,8 @@
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_5sqo8")
-boutonMenu = NodePath("CenterContainer/PanelContainer/Menu/BoutonMenu")
-boutonQuitter = NodePath("CenterContainer/PanelContainer/Menu/BoutonQuitter")
+boutonMenu = NodePath("CenterContainer/PanelContainer/MarginContainer/Menu/BoutonMenu")
+boutonQuitter = NodePath("CenterContainer/PanelContainer/MarginContainer/Menu/BoutonQuitter")
 
 [node name="TableJeu" parent="." instance=ExtResource("2_oi4kl")]
 
@@ -31,27 +31,45 @@ grow_vertical = 2
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
 layout_mode = 2
 
-[node name="Menu" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_top = 22
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_bottom = 22
+
+[node name="Menu" type="VBoxContainer" parent="CenterContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 25
 alignment = 1
 
-[node name="Defaite" type="Label" parent="CenterContainer/PanelContainer/Menu"]
+[node name="Defaite" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/Menu"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.80784315)
 theme_override_constants/shadow_offset_y = 3
 theme_override_constants/outline_size = 1
 theme_override_constants/shadow_outline_size = 5
 theme_override_font_sizes/font_size = 64
-text = "Votre fanclub est vide, vous avez perdu"
+text = "Votre fanclub est vide"
 
-[node name="BoutonMenu" type="Button" parent="CenterContainer/PanelContainer/Menu"]
+[node name="Defaite2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/Menu"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.80784315)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_font_sizes/font_size = 32
+text = "vous avez perdu"
+
+[node name="BoutonMenu" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/Menu"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../BoutonQuitter")
 theme_override_font_sizes/font_size = 32
 text = "Retour au Menu"
 
-[node name="BoutonQuitter" type="Button" parent="CenterContainer/PanelContainer/Menu"]
+[node name="BoutonQuitter" type="Button" parent="CenterContainer/PanelContainer/MarginContainer/Menu"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath(".")
 theme_override_font_sizes/font_size = 32
