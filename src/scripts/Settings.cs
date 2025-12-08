@@ -7,4 +7,23 @@ public partial class Settings : Node2D
 	public bool ActionEnabled { get; set; } = true;
 	public bool EasyModeEnabled { get; set; } = false;
 	public bool IsPaused { get; set; } = false;
+
+	public bool IsMuted { get; private set; } = false;
+
+	public override void _Process(double delta)
+	{
+		// Écoute directe de la touche mute
+		if (Input.IsActionJustPressed("mute"))
+		{
+			ToggleMute();
+		}
+	}
+
+	public void ToggleMute()
+	{
+		IsMuted = !IsMuted;
+		int masterIndex = AudioServer.GetBusIndex("Master");
+		AudioServer.SetBusMute(masterIndex, IsMuted);
+		GD.Print("Mute toggled: ", IsMuted);
+	}
 }

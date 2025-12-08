@@ -85,19 +85,25 @@ content_scale_aspect = 4
 content_scale_stretch = 1
 content_scale_factor = 2.0
 ok_button_text = "OK"
-dialog_text = "SCÉNARIO
-Vous avez pondu le meilleur roman de votre longue carrière.
-Pourtant, votre éditeur réagit mal. Est-ce la jalousie qui le pousse, devant vos yeux horrifiés, à saisir votre manuscrit — ainsi que votre contrat d’édition — pour les balancer dans la déchiqueteuse ?
+dialog_text = "Vous avez pondu le meilleur roman de votre carrière.
+Pourtant, votre éditeur l'a balancé dans la déchiqueteuse ! 
 
-Comme vous aviez confiance en lui, vous lui aviez fourni votre seule copie !
+OBJECTIF
+Reconstruire le manuscrit, une languette à la fois, pour l'autopublier avant que votre fanclub se vide.
 
-BUT DU JEU
-Reconstruire le manuscrit, une languette à la fois, pour l'autopublier avant que le fanclub se vide.
-
+==========
 CONTRÔLES :
-- joystick gauche / droite pour naviguer parmi les tranches du chapitre à réparer. 
-- Joystick vers le haut pour \"prendre\" une bande
-- Joystick vers le bas pour la \"déposer\" sur la table"
+- GAUCHE / DROITE => naviguer parmi les tranches. 
+- HAUT => \"prendre\"
+- BAS =>  \"déposer\"
+- p => pause
+- l => quitter (lose)
+==========
+MENU DE TESTS
+- m = mute
+- l = perdre  (lose)
+- t = tricher (win)
+- h = hasard (relancer)"
 dialog_autowrap = true
 
 [node name="SousMenu" type="VBoxContainer" parent="."]
