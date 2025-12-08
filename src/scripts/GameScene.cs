@@ -4,7 +4,7 @@ using System;
 public partial class GameScene : Node
 {
 	[Export] public float FansMax = 10000f;
-	[Export] public float PerteParSeconde = 12f;
+	[Export] public float PerteParSeconde = 22f;
 
 	private float fans;
 	private Lecteurs overlay;
@@ -14,9 +14,13 @@ public partial class GameScene : Node
 
 	public override void _Ready()
 	{
+		var settings = GetNode<Settings>("/root/Main");
+		FansMax = settings.FansDepart;
+		PerteParSeconde = settings.PerteParSeconde;
+
 		fans = FansMax;
 		overlay = GetNode<Lecteurs>("../GameInfos/Lecteurs");
-		debugLabel = GetNode<Label>("../GameInfos/DebugLabel"); // Label ajouté dans GameInfos
+		debugLabel = GetNode<Label>("../GameInfos/DebugLabel");
 		debugLabel.Visible = false;
 		MAJUI();
 	}

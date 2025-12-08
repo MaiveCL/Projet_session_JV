@@ -55,6 +55,9 @@ public partial class Chapitre : Node2D
 	
 	public override void _Ready()
 	{
+		var settings = GetNode<Settings>("/root/Main");
+		NbTranches = settings.Tranches;
+
 		// --- récupérer l'overlay sans caster Monde ---
 		var overlay = GetNode<Lecteurs>("/root/Main/SceneContainer/Monde/GameInfos/Lecteurs");
 

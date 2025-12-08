@@ -3,26 +3,44 @@
 [ext_resource type="Script" uid="uid://du4prw64qmn36" path="res://scripts/VictoireScene.cs" id="1_cbt75"]
 [ext_resource type="PackedScene" uid="uid://c8v07me1ll0r" path="res://scenes/table_jeu.tscn" id="2_ektq5"]
 
-[node name="VictoireScene" type="Control" node_paths=PackedStringArray("boutonMenu", "boutonQuitter")]
+[node name="VictoireScene" type="Control" node_paths=PackedStringArray("boutonMenu", "boutonQuitter", "fanDepartInput", "tranchesInput", "perteFanInput", "startButton")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_cbt75")
-boutonMenu = NodePath("Menu/BoutonMenu")
-boutonQuitter = NodePath("Menu/BoutonQuitter")
+boutonMenu = NodePath("CenterContainer/PanelContainer/Menu/BoutonMenu")
+boutonQuitter = NodePath("CenterContainer/PanelContainer/Menu/BoutonQuitter")
+fanDepartInput = NodePath("CenterContainer/PanelContainer/Menu/FanDepartInput")
+tranchesInput = NodePath("CenterContainer/PanelContainer/Menu/TranchesInput")
+perteFanInput = NodePath("CenterContainer/PanelContainer/Menu/PerteFanInput")
+startButton = NodePath("CenterContainer/PanelContainer/Menu/Button")
 
 [node name="TableJeu" parent="." instance=ExtResource("2_ektq5")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Menu" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = -1123.0
-offset_right = 1127.0
-offset_bottom = 252.0
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1125.0
+offset_top = -407.0
+offset_right = 1125.0
+offset_bottom = 407.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Menu" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
+layout_mode = 2
 theme_override_constants/separation = 25
 alignment = 1
 
-[node name="Defaite" type="Label" parent="Menu"]
+[node name="Defaite" type="Label" parent="CenterContainer/PanelContainer/Menu"]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.80784315)
 theme_override_constants/shadow_offset_y = 3
@@ -31,14 +49,56 @@ theme_override_constants/shadow_outline_size = 5
 theme_override_font_sizes/font_size = 64
 text = "Bravo, vous avez reconstitué le manuscrit avant de perdre tous vos fans !"
 
-[node name="BoutonMenu" type="Button" parent="Menu"]
+[node name="BoutonMenu" type="Button" parent="CenterContainer/PanelContainer/Menu"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../BoutonQuitter")
 theme_override_font_sizes/font_size = 32
 text = "Retour au Menu"
 
-[node name="BoutonQuitter" type="Button" parent="Menu"]
+[node name="BoutonQuitter" type="Button" parent="CenterContainer/PanelContainer/Menu"]
 layout_mode = 2
 focus_neighbor_bottom = NodePath(".")
 theme_override_font_sizes/font_size = 32
 text = "Quitter"
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Créez votre propre prochain niveau de jeu :"
+
+[node name="Label2" type="Label" parent="CenterContainer/PanelContainer/Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Taille du Fanclub"
+
+[node name="FanDepartInput" type="SpinBox" parent="CenterContainer/PanelContainer/Menu"]
+layout_mode = 2
+min_value = 100.0
+max_value = 100000.0
+value = 10000.0
+
+[node name="Label3" type="Label" parent="CenterContainer/PanelContainer/Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Nombre de tranche par page (entre 1 et 9) :"
+
+[node name="TranchesInput" type="SpinBox" parent="CenterContainer/PanelContainer/Menu"]
+layout_mode = 2
+min_value = 1.0
+max_value = 9.0
+value = 5.0
+
+[node name="label4" type="Label" parent="CenterContainer/PanelContainer/Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Perte de fan par secondes (défaut à 22)"
+
+[node name="PerteFanInput" type="SpinBox" parent="CenterContainer/PanelContainer/Menu"]
+layout_mode = 2
+min_value = 1.0
+value = 22.0
+
+[node name="Button" type="Button" parent="CenterContainer/PanelContainer/Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Démarrer la nouvelle partie"

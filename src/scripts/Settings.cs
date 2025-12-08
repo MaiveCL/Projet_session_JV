@@ -7,6 +7,11 @@ public partial class Settings : Node2D
 	public bool ActionEnabled { get; set; } = true;
 	public bool EasyModeEnabled { get; set; } = false;
 	public bool IsPaused { get; set; } = false;
+	
+	// Config de niveau
+	public int FansDepart { get; set; } = 10000;
+	public int Tranches { get; set; } = 5;
+	public float PerteParSeconde { get; set; } = 22f;
 
 	public bool IsMuted { get; private set; } = false;
 
