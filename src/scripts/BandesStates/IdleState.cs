@@ -24,6 +24,9 @@ public partial class IdleState : BandeState
 
 	public override void Update(double delta)
 	{
+		var settings = GetNode<Settings>("/root/Main");
+		if (settings.IsPaused)
+			return;
 		//DebugTool.LogOnce("Bande PATH = " + GetBandeNode()?.GetPath());
 
 		var bande = GetBandeNode();

@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://cqske4ypoi73d"]
+
+[ext_resource type="Script" uid="uid://du4prw64qmn36" path="res://scripts/VictoireScene.cs" id="1_cbt75"]
+[ext_resource type="PackedScene" uid="uid://c8v07me1ll0r" path="res://scenes/table_jeu.tscn" id="2_ektq5"]
+
+[node name="VictoireScene" type="Control" node_paths=PackedStringArray("boutonMenu", "boutonQuitter")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_cbt75")
+boutonMenu = NodePath("Menu/BoutonMenu")
+boutonQuitter = NodePath("Menu/BoutonQuitter")
+
+[node name="TableJeu" parent="." instance=ExtResource("2_ektq5")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = -1123.0
+offset_right = 1127.0
+offset_bottom = 252.0
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="Defaite" type="Label" parent="Menu"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.80784315)
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 5
+theme_override_font_sizes/font_size = 64
+text = "Bravo, vous avez reconstitué le manuscrit avant de perdre tous vos fans !"
+
+[node name="BoutonMenu" type="Button" parent="Menu"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../BoutonQuitter")
+theme_override_font_sizes/font_size = 32
+text = "Retour au Menu"
+
+[node name="BoutonQuitter" type="Button" parent="Menu"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath(".")
+theme_override_font_sizes/font_size = 32
+text = "Quitter"

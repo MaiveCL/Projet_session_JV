@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d3cim0mxktjgy"]
+[gd_scene load_steps=16 format=3 uid="uid://d3cim0mxktjgy"]
 
 [ext_resource type="Script" uid="uid://b1gs1mhbt5bb5" path="res://scripts/Settings.cs" id="1_c3moh"]
 [ext_resource type="PackedScene" uid="uid://cegw7ckoy75fx" path="res://scenes/MenuScene.tscn" id="3_xy4bk"]
@@ -7,10 +7,14 @@
 [ext_resource type="Script" uid="uid://chr3gxn1htr1n" path="res://scripts/MondeStates/MenuState.cs" id="6_s13o8"]
 [ext_resource type="Script" uid="uid://c3lmcdspcu5y6" path="res://scripts/MondeStates/InitialState.cs" id="7_525qm"]
 [ext_resource type="Script" uid="uid://kktv7864igii" path="res://scripts/MondeStates/GameState.cs" id="7_edr6m"]
+[ext_resource type="Script" uid="uid://cxqkbxwcfvu3r" path="res://scripts/MondeStates/VictoireState.cs" id="8_7sf4v"]
 [ext_resource type="AudioStream" uid="uid://kjoc5844jjip" path="res://assets/audio/Epic-Inspiring-Cinematic-Journey_AdobeStock.ogg" id="8_edr6m"]
 [ext_resource type="AudioStream" uid="uid://c2i4k0m5cs3eg" path="res://assets/audio/DETECT_pickupCoin.wav" id="9_4ppgb"]
 [ext_resource type="Script" uid="uid://cyif70tw8gjt" path="res://scripts/MondeStates/ConfigState.cs" id="9_525qm"]
+[ext_resource type="PackedScene" uid="uid://cqske4ypoi73d" path="res://scenes/victoire_scene.tscn" id="9_a83is"]
+[ext_resource type="Script" uid="uid://d1ug3bdgadcum" path="res://scripts/MondeStates/DefaiteState.cs" id="9_hjfgh"]
 [ext_resource type="AudioStream" uid="uid://crp8fm5qxxi2c" path="res://assets/audio/SELECT_synth.wav" id="10_4ppgb"]
+[ext_resource type="PackedScene" uid="uid://ply1meuxpsat" path="res://scenes/defaite_scene.tscn" id="11_g0gsa"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_c3moh")
@@ -32,9 +36,13 @@ GameScene = ExtResource("6_edr6m")
 
 [node name="PauseState" type="Node" parent="MondeStateMachine"]
 
-[node name="GagneState" type="Node" parent="MondeStateMachine"]
+[node name="VictoireState" type="Node" parent="MondeStateMachine"]
+script = ExtResource("8_7sf4v")
+VictoireScene = ExtResource("9_a83is")
 
-[node name="perdState" type="Node" parent="MondeStateMachine"]
+[node name="DefaiteState" type="Node" parent="MondeStateMachine"]
+script = ExtResource("9_hjfgh")
+DefaiteScene = ExtResource("11_g0gsa")
 
 [node name="ConfigState" type="Node" parent="MondeStateMachine"]
 script = ExtResource("9_525qm")

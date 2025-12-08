@@ -9,6 +9,10 @@ public partial class Auteur : Node2D
 
 	public override void _Process(double delta)
 	{
+		var settings = GetNode<Settings>("/root/Main");
+		if (settings.IsPaused)
+			return;
+			
 		Vector2 move = Vector2.Zero;
 
 		if (Input.IsActionPressed("right"))

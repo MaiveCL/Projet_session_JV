@@ -38,6 +38,10 @@ public partial class MovingState : BandeState
 
 	public override void Update(double delta)
 	{
+		var settings = GetNode<Settings>("/root/Main");
+		if (settings.IsPaused)
+			return;
+			
 		var b = GetBandeNode();
 		if (b == null) return;
 
