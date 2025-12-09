@@ -141,4 +141,44 @@ public partial class MovingState : BandeState
 			b.Scale = Vector2.One;
 		}
 	}
+	
+	private void PropagerCollision(Chapitre chapitre, BandeNode bandeCollision)
+	{
+		// On garde en mémoire le déplacement à appliquer
+		float deplacementX = bandeCollision.Position.X - positionLibreX;
+
+		foreach (var autre in chapitre.BandesPool)
+		{
+			if (autre == bandeCollision) continue;
+
+			// Collision physique avec la bande collision
+			if (Mathf.Abs(autre.Position.X - bandeCollision.Position.X) < (chapitre.LargeurBande + chapitre.Marge) / 2f)
+			{
+				// Vérifier si la bande rencontrée est consécutive par rapport à l'ordre original
+				int indexBandeCollision = chapitre.OrdreBandes.IndexOf(bandeCollision.FrameIndex);
+				int indexAutre = chapitre.OrdreBandes.IndexOf(autre.FrameIndex);
+
+				if (indexBandeCollision == -1 || indexAutre == -1) continue;
+
+				if (Mathf.Abs(indexBandeCollision - indexAutre) == 1)
+				{
+					// Appliquer le même déplacement physique que la bande collision a subi
+					float ancienneX = autre.Position.X;
+					autre.Position = new Vector2(bandeCollision.Position.X, autre.Position.Y);
+
+					// Échange logique dans l'ordre
+					EchangerOrdreGlobale(chapitre, bandeCollision, autre);
+
+					// Mettre à jour la position de la bande collision pour continuer la propagation
+					bandeCollision.Position = new Vector2(ancienneX, bandeCollision.Position.Y);
+
+					// On peut continuer la propagation sur la nouvelle bande écrasée
+					PropagerCollision(chapitre, autre);
+					return; // On stoppe après un échange pour cette frame, propagation récursive simple
+				}
+			}
+		}
+	}
 }
+
+/* si la bande collision les 2 index de ses voisins soustrait ça donne 1 ou -1, la bande collision se déplace exactement de la même valeur que prédédemment et la bande qu'elle écrase vient prendre sa place */

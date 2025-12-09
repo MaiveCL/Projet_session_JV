@@ -65,7 +65,6 @@ public partial class Chapitre : Node2D
 			BandeTexture = ResourceLoader.Load<Texture2D>(TexturePath);
 		}
 
-
 		// --- récupérer l'overlay sans caster Monde ---
 		var overlay = GetNode<Lecteurs>("/root/Main/SceneContainer/Monde/GameInfos/Lecteurs");
 
@@ -184,10 +183,7 @@ public partial class Chapitre : Node2D
 		if (nouvelle == bandeProche)
 			return; // rien n’a changé → on sort
 
-		// Affecter la nouvelle
 		bandeProche = nouvelle;
-		
-		// %%% Déclencher le rééquilibrage du pool seulement si la bande proche a changé
 		RecycleBandes();
 	}
 
