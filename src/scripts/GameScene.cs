@@ -48,7 +48,7 @@ public partial class GameScene : Node
 			GameOver();
 
 		if (Input.IsActionJustPressed("triche_defaite"))
-			fans = 50;
+			fans = 5;
 
 		// Toggle debug avec F12
 		if (Input.IsActionJustPressed("debug"))

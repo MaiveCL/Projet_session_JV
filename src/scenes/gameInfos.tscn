@@ -67,19 +67,19 @@ text = "[b]Vous avez pondu le meilleur roman de votre carrière.[/b]
 Pourtant, votre éditeur l'a balancé dans la déchiqueteuse !
 
 [center][b]OBJECTIF[/b][/center]
-Reconstruire le manuscrit, une languette à la fois, pour l'autopublier avant que votre fanclub se vide.
+Reconstruire le manuscrit, pour l'autopublier avant que votre fanclub se vide.
 
-[center]==========[/center]
+[center]====================[/center]
 [b]CONTRÔLES :[/b]
 - [color=yellow]GAUCHE / DROITE[/color] => naviguer parmi les tranches
 - [color=yellow]HAUT[/color] => \"prendre\"
 - [color=yellow]BAS[/color] => \"déposer\"
 - [color=yellow]p[/color] => pause
+- [color=yellow]m[/color] = mute
 - [color=yellow]l[/color] => quitter (lose)
 
-[center]==========[/center]
+[center]====================[/center]
 [b]MENU DE TESTS[/b]
-- [color=orange]m[/color] = mute
 - [color=orange]l[/color] = perdre (lose)
 - [color=orange]t[/color] = tricher (win)
 - [color=orange]h[/color] = hasard (relancer)"

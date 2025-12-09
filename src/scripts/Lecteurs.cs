@@ -14,6 +14,9 @@ public partial class Lecteurs : ProgressBar
 		chapitreNode = GetNode<Chapitre>("/root/Main/SceneContainer/Monde/TableJeu/Chapitre");
 		AjusterTaille();
 		valeurTexte = GetNode<Label>("ValeurTexte");
+		// Récupérer les paramètres personnalisés
+		var settings = GetNode<Settings>("/root/Main");
+		MaxValue = settings.FansDepart; // <-- important
 	}
 
 	public override void _Process(double delta)

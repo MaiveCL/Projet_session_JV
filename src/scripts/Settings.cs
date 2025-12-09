@@ -3,6 +3,17 @@ using System;
 
 public partial class Settings : Node2D
 {
+	public int ChapitreCourant { get; set; } = 0;   // index du chapitre actif
+	public int Victoires { get; set; } = 0;         // compteur de victoires
+
+	[Export] public Godot.Collections.Array<string> ChapitreTextures = new Godot.Collections.Array<string>
+	{
+		"res://assets/sprites/chap1_total.png",
+		"res://assets/sprites/chap2_total.png",
+		"res://assets/sprites/chap3_total.png",
+		"res://assets/sprites/chap4_total.png"
+	};
+	
 	public bool MusicEnabled { get; set; } = true;
 	public bool ActionEnabled { get; set; } = true;
 	public bool EasyModeEnabled { get; set; } = false;

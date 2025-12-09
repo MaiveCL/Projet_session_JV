@@ -5,7 +5,6 @@ using System.Linq;
 
 public partial class Chapitre : Node2D
 {
-	// %%% Ajout de l'événement pour notifier la victoire
 	public event Action VictoireDetectee;
 	
 	private BandeNode bandeProche;
@@ -57,6 +56,15 @@ public partial class Chapitre : Node2D
 	{
 		var settings = GetNode<Settings>("/root/Main");
 		NbTranches = settings.Tranches;
+		
+		// choisir le chapitre courant via un index
+		int chapitreIndex = settings.ChapitreCourant; // int que tu définis dans Settings
+		if (chapitreIndex >= 0 && chapitreIndex < settings.ChapitreTextures.Count)
+		{
+			TexturePath = settings.ChapitreTextures[chapitreIndex];
+			BandeTexture = ResourceLoader.Load<Texture2D>(TexturePath);
+		}
+
 
 		// --- récupérer l'overlay sans caster Monde ---
 		var overlay = GetNode<Lecteurs>("/root/Main/SceneContainer/Monde/GameInfos/Lecteurs");
@@ -296,6 +304,13 @@ public partial class Chapitre : Node2D
 			if (ordreBandes[i] != expected)
 				return;
 		}
+		// Victoire détectée
+		var settings = GetNode<Settings>("/root/Main");
+		settings.Victoires++;
+
+		// Incrémenter l’index du chapitre avec modulo
+		settings.ChapitreCourant = settings.Victoires % settings.ChapitreTextures.Count;
+
 		VictoireDetectee?.Invoke();
 	}
 	

@@ -85,7 +85,7 @@ text = "Quitter"
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "Créez votre propre prochain niveau de jeu :"
+text = "Créez votre niveau de jeu :"
 autowrap_mode = 2
 
 [node name="Label2" type="Label" parent="CenterContainer/PanelContainer/MarginContainer/Menu"]
