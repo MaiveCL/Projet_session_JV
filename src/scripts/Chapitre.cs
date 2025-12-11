@@ -68,7 +68,6 @@ public partial class Chapitre : Node2D
 			NbPages = (int)settings.ChapitrePages[chapitreIndex];
 		}
 
-		// --- récupérer l'overlay sans caster Monde ---
 		var overlay = GetNode<Lecteurs>("/root/Main/SceneContainer/Monde/GameInfos/Lecteurs");
 
 		DebugTool.LogOnce("LOCAL PATH = " + GetPath());
