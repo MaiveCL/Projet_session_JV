@@ -20,11 +20,13 @@ public partial class Chapitre : Node2D
 
 	public const float MARGE_HAUTE = 20f; // marge fixe en haut
 	public int PoolSize = 20;
+	
+	// Infos du chapitre en cours a aller chercher dans les settings :
 	[Export] public string TexturePath = "res://assets/sprites/chap1_total.png";
+	public int NbPages = 22;
 	
 	public Texture2D BandeTexture;
 
-	public int NbPages = 22; 
 	[Export(PropertyHint.Range, "1,9,1")]
 	public int NbTranches { get; set; } = 8;
 	
@@ -63,6 +65,7 @@ public partial class Chapitre : Node2D
 		{
 			TexturePath = settings.ChapitreTextures[chapitreIndex];
 			BandeTexture = ResourceLoader.Load<Texture2D>(TexturePath);
+			NbPages = (int)settings.ChapitrePages[chapitreIndex];
 		}
 
 		// --- récupérer l'overlay sans caster Monde ---

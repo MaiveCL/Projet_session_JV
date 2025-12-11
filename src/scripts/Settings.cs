@@ -14,6 +14,14 @@ public partial class Settings : Node2D
 		"res://assets/sprites/chap4_total.png"
 	};
 	
+	[Export] public Godot.Collections.Array<int> ChapitrePages = new Godot.Collections.Array<int>
+	{
+		22, // chap1 - 1 a 22
+		21, // chap2 - 23 a 43
+		22, // chap3 - 44 a 65
+		26  // chap4 - 66 a 91
+	};
+	
 	public bool MusicEnabled { get; set; } = true;
 	public bool ActionEnabled { get; set; } = true;
 	public bool EasyModeEnabled { get; set; } = false;
